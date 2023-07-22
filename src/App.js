@@ -32,7 +32,9 @@ function App(){
         return(
           <article key={item.id} className='content'>
             <strong className="nome">{item.name}</strong>
-            <p>{item.content1}</p>
+            <img src={`data:image/jpeg;base64, ${item.mainImage}`} alt={"item.name"} className="capa"/>
+            <p>{item.briefDescription}</p>  
+            <a className="botao">Acessar</a>        
           </article>
         )
       })}
