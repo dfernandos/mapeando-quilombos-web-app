@@ -5,12 +5,14 @@ class Form extends Component{
     constructor(props){
         super(props);
         this.state = {
-            nome: "",
-            content1: "",
-            content2: "",
-            content3: "",
-            content4: "",
-            error: ''
+            form:{
+                nome: "",
+                content1: "",
+                content2: "",
+                content3: "",
+                content4: "",
+                error: ''
+            }
         };
         this.cadastrar = this.cadastrar.bind(this);
     }
