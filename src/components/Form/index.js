@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 function Form({ territoryData, territoryId, onFormSubmit }) {
+  const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
       name: "",
       briefDescription: "",
@@ -102,7 +104,8 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
             await axios.post('http://localhost:8080/api/territory-svc/territory/create', formData);
             console.log('Território cadastrado com sucesso!');
           }
-  
+          navigate('/GestaoConteudo');
+
           // Additional logic or callback can be added here if needed after successful save/update
           if (onFormSubmit) {
             onFormSubmit();

@@ -6,10 +6,10 @@ function Header(){
         <header>
             <div className="menu">
                 <Link to="/"> Home </Link>
+                <Link to="/GestaoConteudo"> Gestão de Conteúdo </Link>
                 <Link to="/sobre"> Sobre </Link>
                 <Link to="/contato"> Contato </Link>
-                <Link to="/cadastro"> Cadastrar </Link>
-                <Link to="/GestaoConteudo"> Gestão de Conteúdo </Link>
+                
             </div>
         </header>
     )
