@@ -66,9 +66,11 @@ function GestaoConteudo() {
 
   return (
     <div className='container'>
+        <div className='header'>
         <h1>Lista de Territórios Quilombolas</h1>
-        <Link to="/cadastro" className="botao">Adicionar</Link>
-
+        <Link to="/cadastro" className="botao">+ Adicionar</Link>
+        </div>
+        
       {territories.map((item) => {
         return (
           <article key={item.id} className='content'>

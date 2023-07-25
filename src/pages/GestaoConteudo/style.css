@@ -4,6 +4,20 @@
     justify-content: space-between;
     gap: 20px;
   }
+
+  .header {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+    margin-right: 20px; /* Espaço entre o botão e o texto */
+  }
+
   
   .content {
     display: flex;
