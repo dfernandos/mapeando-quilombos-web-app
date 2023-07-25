@@ -1,7 +1,69 @@
-.blabla{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%; /* Ajuste a largura desejada dos cards aqui */
+  max-width: 600px; /* Define a largura máxima para telas maiores */
+  justify-content: center;
+  align-items: center;
+  background-color: #f7eaea; /* Cor de fundo do formulário */
+  padding: 20px; /* Adicione espaçamento interno ao formulário */
+  border-radius: 10px; /* Adicione bordas arredondadas para o formulário */
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Adicione sombra para destacar o formulário */
+  margin: 0 auto; /* Centralize o formulário horizontalmente */
 }
+
+
+.form-container h2 {
+  font-size: 28px; /* Tamanho da fonte para o título */
+  margin-bottom: 20px; /* Adicione espaçamento entre o título e o restante do formulário */
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ocupa toda a largura disponível */
+}
+
+.form-container label {
+  font-size: 18px; /* Tamanho da fonte para os rótulos */
+  margin-top: 10px; /* Adicione espaçamento entre os rótulos e os campos de entrada */
+}
+
+.form-container input,
+.form-container textarea {
+  width: 100%; /* Ocupa toda a largura disponível */
+  padding: 8px; /* Adicione espaçamento interno para os campos de entrada */
+  font-size: 16px; /* Tamanho da fonte para os campos de entrada */
+  margin-bottom: 15px; /* Adicione espaçamento entre os campos de entrada */
+  border: 1px solid #ccc; /* Adicione uma borda para os campos de entrada */
+  border-radius: 5px; /* Adicione bordas arredondadas para os campos de entrada */
+}
+
+.form-container button {
+  width: 100%; /* Ocupa toda a largura disponível */
+  padding: 10px; /* Adicione espaçamento interno para o botão */
+  font-size: 18px; /* Tamanho da fonte para o botão */
+  background-color: #bc8f8f; /* Cor de fundo do botão */
+  color: #fff; /* Cor do texto do botão */
+  border: none; /* Remova a borda do botão */
+  border-radius: 5px; /* Adicione bordas arredondadas para o botão */
+  cursor: pointer; /* Altere o cursor ao passar o mouse sobre o botão */
+}
+
+.form-container button:hover {
+  background-color: #a06b6b; /* Cor de fundo do botão ao passar o mouse */
+}
+  
+  img.capa {
+    max-width: 100%;
+    max-height: 60%; /* Ajuste a altura máxima da imagem dentro do card aqui */
+    object-fit: cover; /* Para garantir que a imagem preencha todo o espaço disponível */
+  }
+  
+  img.preview {
+    max-width: 100%;
+    max-height: 60%; /* Ajuste a altura máxima da imagem dentro do card aqui */
+    object-fit: cover; /* Para garantir que a imagem preencha todo o espaço disponível */
+  }
+  

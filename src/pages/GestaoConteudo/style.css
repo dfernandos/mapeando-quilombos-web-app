@@ -1,92 +1,112 @@
-.container{
+.container {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: flex-start center;
+    justify-content: space-between;
     gap: 20px;
-}
-
-.headerItem {
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    margin: 8px;
+    padding: 20px;
+    background: #f7eaea;
+  }
+  
+  .headerItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-
-.button-container {
-    display: flex;
-  }
-
-  .button-container {
-    display: flex;
-    margin-top: 5px; /* Adicione o espaçamento vertical entre os botões */
-  }
   
-  .button-container button {
-    margin-right: 10px; /* Adicione o espaçamento horizontal entre os botões */
-  }
-  
-  /* Estilize os botões */
-  .button-container button {
-    background-color: #BC8F8F;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    padding: 8px 12px;
-    font-size: 18px;
-  }
-  
-  /* Estilize os ícones dos botões */
-  .button-container .icon {
-    margin-right: 5px;
-  }
-
-body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 70%;
-    background-color: #fff;
-    border-radius: 7px;
-    border-width: 1px;
-    margin: 8px;
-    padding: 10px;
-    background: #f7eaea	;
-}
-.nome{
+  .nome {
     font-size: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.descricao{
-    margin: 5px;
-
-}
-
-.botao{
-    height: 40px;
-    background: none;
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .button-container button {
+    height: 30px;
+    background-color: #bc8f8f;
     border-radius: 5px;
-    color: #BC8F8F;
-    border: 2px solid #BC8F8F;
+    color: #fff;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     transition: all 0.5s;
-}
-
-.botao:hover{
-    background-color: #BC8F8F;
-    color: #FFF;
-}
+    cursor: pointer;
+    padding: 8px 12px;
+    margin-right: 10px;
+  }
+  
+  .button-container button:last-child {
+    margin-right: 0;
+  }
+  
+  .button-container button:hover {
+    background-color: #a06b6b;
+  }
+  
+  .botao {
+    height: 30px;
+    background-color: #bc8f8f;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.5s;
+    cursor: pointer;
+    text-decoration: none; /* Adicione esta propriedade para remover a decoração de texto do link */
+    padding: 8px 12px;
+    margin-right: 10px;
+  }
+  
+  .botao:hover {
+    background-color: #a06b6b;
+  }
+  
+  .capa {
+    max-width: 100%;
+    max-height: 150px;
+  }
+  
+  /* Media queries para ajustar o layout em telas menores */
+  
+  @media screen and (max-width: 768px) {
+    .container {
+      flex-direction: column; /* Altera a direção para coluna em telas menores */
+      align-items: center; /* Centraliza os cards na horizontal */
+    }
+  
+    .content {
+      width: 90%; /* Ajusta a largura do card em telas menores */
+    }
+  
+    .botao {
+      font-size: 12px; /* Tamanho menor para o texto dos botões em telas menores */
+      padding: 6px 10px; /* Espaçamento menor para os botões em telas menores */
+    }
+  
+    .capa {
+      max-height: 100px; /* Ajusta a altura máxima da imagem dentro do card em telas menores */
+    }
+  }
+  

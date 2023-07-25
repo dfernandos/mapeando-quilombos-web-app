@@ -3,13 +3,11 @@ import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import Form from '../../components/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
 
 function GestaoConteudo() {
   const [territories, setTerritories] = useState([]);
-  const [editingTerritory, setEditingTerritory] = useState(null);
   const navigate = useNavigate(); // Use useNavigate to perform navigation
 
   useEffect(() => {
@@ -70,7 +68,7 @@ function GestaoConteudo() {
             </div>
             <img src={`data:image/jpeg;base64, ${item.mainImage}`} alt={item.name} className="capa" />
             <p>{item.briefDescription}</p>
-            <a className="botao">Acessar</a>
+            <a className="botao" href='#'>Acessar</a>
           </article>
         );
       })}

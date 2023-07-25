@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function Form({ territoryData, territoryId, onFormSubmit }) {
     const [formData, setFormData] = useState({
-      nome: "",
+      name: "",
       briefDescription: "",
       history: "",
       cartografia: "",
@@ -23,13 +23,13 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           const territoryData = response.data;
           // Update the form data with the fetched territory data
           setFormData({
-            nome: territoryData.nome || '',
+            name: territoryData.name || '',
             briefDescription: territoryData.briefDescription || '',
             history: territoryData.history || '',
             cartografia: territoryData.cartografia || '',
             religion: territoryData.religion || '',
             extra_content: territoryData.extra_content || '',
-            mainImage: null,
+            mainImage: territoryData.mainImage || null,
             map: territoryData.map || '',
             error: '',
           });
@@ -40,15 +40,38 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
     }
   }, [territoryId]);
 
+  const [imagePreview, setImagePreview] = useState(null);
+
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Set the 'file' part with the selected file
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        mainImage: file,
+      }));
+  
+      // Read the selected image and set the preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
+  
 
   async function handleSave(event) {
     event.preventDefault();
+    setImagePreview(null)
 
-    const { nome, briefDescription, history, cartografia, religion, extra_content, mainImage, map } = formData;
+    const { name, briefDescription, history, cartografia, religion, extra_content, mainImage, map } = formData;
 
-    if (nome && briefDescription && history && cartografia && religion && extra_content && mainImage && map) {
+    if (name && briefDescription && history && cartografia && religion && extra_content && mainImage && map) {
       const formData = new FormData();
-      formData.append('name', nome);
+      formData.append('name', name);
       formData.append('briefDescription', briefDescription);
       formData.append('history', history);
       formData.append('cartografia', cartografia);
@@ -75,7 +98,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
 
         // Clear the form fields after save/update
         setFormData({
-          nome: "",
+          name: "",
           briefDescription: "",
           history: "",
           cartografia: "",
@@ -95,16 +118,15 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
   }
 
   return (
-    <div className='blabla'>
+    <div className='form-container'>
       <h2>Cadastro de Território</h2>
       {formData.error && <p>{formData.error}</p>}
       <form onSubmit={handleSave} encType="multipart/form-data" className="blabla">
-        {/* ... */}
         <label>Nome:</label>
         <input
-          type="text"
-          value={formData.nome}
-          onChange={(event) => setFormData({ ...formData, nome: event.target.value })}
+        type="text"
+        value={formData.name} 
+        onChange={(event) => setFormData({ ...formData, name: event.target.value })} // Change 'name' to 'name' here
         />
         <label>Breve Descrição:</label>
         <textarea
@@ -143,9 +165,19 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         />
         <label>Imagem (capa):</label>
         <input
-          type="file"
-          onChange={(event) => setFormData({ ...formData, mainImage: event.target.files[0] })}
+        type="file"
+        name="file"
+        onChange={handleImageChange}
         />
+        {/* Show the image preview */}
+        {imagePreview && (
+        <img src={imagePreview} alt="Preview" className="preview" />
+        )}
+
+        {/* Display the selected image */}
+        {formData.mainImage && <img src={`data:image/jpeg;base64, ${formData.mainImage}`} alt={formData.name} className="capa" />}
+
+
         <label>Imagem (Mapa):</label>
         <input
           type="text"

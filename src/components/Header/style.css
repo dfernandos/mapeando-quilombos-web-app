@@ -1,4 +1,4 @@
-header{
+header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,32 +6,35 @@ header{
     height: 60px;
     width: 100%;
     background-color: #BC8F8F;
-    columns: #fff;
-}
+    color: #fff;
+    font-family: 'Arial', sans-serif; /* Escolha uma fonte agradável e legível */
+    padding: 0 20px; /* Adicione espaçamento interno ao header */
+  }
   
   header a {
     color: #fff;
     font-size: 20px;
+    text-decoration: none; /* Remova a decoração de texto do link */
   }
   
   header a + a {
-    margin-left: 10px;
+    margin-left: 20px; /* Aumente o espaçamento entre os links */
   }
   
   /* Estilos responsivos */
   @media (max-width: 768px) {
     header {
-      /* Ajuste a altura do cabeçalho para dispositivos menores, se necessário */
       height: 80px;
-      font-size: 16px; /* Ajuste o tamanho da fonte para dispositivos menores */
-      padding: 0 10px; /* Ajuste o espaçamento interno para dispositivos menores */
+      font-size: 16px;
+      padding: 0 10px;
     }
   
     header a {
-      font-size: 16px; /* Ajuste o tamanho da fonte para dispositivos menores */
+      font-size: 16px;
     }
   
     header a + a {
-      margin-left: 5px; /* Ajuste o espaçamento entre os links para dispositivos menores */
+      margin-left: 10px;
     }
   }
+  
