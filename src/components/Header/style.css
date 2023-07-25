@@ -1,21 +1,37 @@
 header{
-    width: 100%;
-    height: 100px;
-    background-color: #4c89ec;
-    color: #fff;
-
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 21px;
-
+    font-size: 35px;
+    height: 60px;
+    width: 100%;
+    background-color: #BC8F8F;
+    columns: #fff;
 }
-
-header a{
+  
+  header a {
     color: #fff;
     font-size: 20px;
-}
-
-header a + a {
+  }
+  
+  header a + a {
     margin-left: 10px;
-}
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    header {
+      /* Ajuste a altura do cabeçalho para dispositivos menores, se necessário */
+      height: 80px;
+      font-size: 16px; /* Ajuste o tamanho da fonte para dispositivos menores */
+      padding: 0 10px; /* Ajuste o espaçamento interno para dispositivos menores */
+    }
+  
+    header a {
+      font-size: 16px; /* Ajuste o tamanho da fonte para dispositivos menores */
+    }
+  
+    header a + a {
+      margin-left: 5px; /* Ajuste o espaçamento entre os links para dispositivos menores */
+    }
+  }

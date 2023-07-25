@@ -8,6 +8,7 @@ import Cadastrar from './pages/Cadastrar'
 
 import Erro from './pages/Erro';
 import Territorio from './pages/Territorio'
+import GestaoConteudo from './pages/GestaoConteudo';
 
 function RoutesApp(){
 
@@ -21,6 +22,7 @@ function RoutesApp(){
                 <Route path="/*" element={ <Erro/> }/>
                 <Route path="/cadastro" element={ <Cadastrar/> }/>
                 <Route path="/territorio/:id" element={ <Territorio/> }/>
+                <Route path="/GestaoConteudo" element={ <GestaoConteudo/> }/> 
             </Routes>
         </BrowserRouter>
 
