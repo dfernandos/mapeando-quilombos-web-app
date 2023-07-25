@@ -4,19 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import CustomAlert from '../../components/CustomAlert';
-import { useLocation } from 'react-router-dom';
-
+import { useNavigate, Link } from 'react-router-dom';
 
 function GestaoConteudo() {
   const [territories, setTerritories] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
   const [territoryToDelete, setTerritoryToDelete] = useState(null);
 
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const territoryId = searchParams.get('id');
 
   const navigate = useNavigate();
 
@@ -68,6 +63,7 @@ function GestaoConteudo() {
     setTerritoryToDelete(null);
   }
 
+
   return (
     <div className='container'>
       {territories.map((item) => {
@@ -86,8 +82,8 @@ function GestaoConteudo() {
             </div>
             <img src={`data:image/jpeg;base64, ${item.mainImage}`} alt={item.name} className="capa" />
             <p>{item.briefDescription}</p>
-            <a className="botao" href='#'>Acessar</a>
-
+            <Link to={`/territorio/${item.id}`} className="botao">Acessar</Link>
+  
             {showAlert && territoryToDelete === item.id && (
               <CustomAlert
                 message="Tem certeza que deseja deletar este território?"
