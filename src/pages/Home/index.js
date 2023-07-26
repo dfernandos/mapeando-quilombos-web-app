@@ -1,4 +1,3 @@
-import React,{useState, useEffect} from 'react';
 import './style.css'
 import Map from '../../components/Map';
 
