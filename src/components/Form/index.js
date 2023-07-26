@@ -46,15 +46,15 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
   
     const [imagePreview, setImagePreview] = useState(null);
   
-    const handleImageChange = (event) => {
+    const handleImageChange = async (event) => {
       const file = event.target.files[0];
       if (file) {
-        // Set the 'file' part with the selected file
+        const compressedImage = await compressImage(file); // Function to compress the image
         setFormData((prevFormData) => ({
           ...prevFormData,
-          mainImage: file,
+          mainImage: compressedImage,
         }));
-  
+    
         // Read the selected image and set the preview URL
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -62,6 +62,44 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         };
         reader.readAsDataURL(file);
       }
+    };
+    
+
+    const compressImage = (imageFile) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+  
+            const maxWidth = 800; // Defina o tamanho máximo da imagem
+            let newWidth = img.width;
+            let newHeight = img.height;
+  
+            if (img.width > maxWidth) {
+              newWidth = maxWidth;
+              newHeight = (img.height * maxWidth) / img.width;
+            }
+  
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+  
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+  
+            canvas.toBlob((blob) => {
+              resolve(blob);
+            }, 'image/jpeg', 0.8); // Defina a qualidade da imagem comprimida (0 a 1)
+          };
+        };
+        reader.onerror = (error) => {
+          console.error('Erro ao ler a imagem:', error);
+          reject(error);
+        };
+        reader.readAsDataURL(imageFile);
+      });
     };
   
     // Load the image preview when formData.mainImage changes
