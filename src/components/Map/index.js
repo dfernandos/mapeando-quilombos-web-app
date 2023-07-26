@@ -9,9 +9,8 @@ import {
 import 'leaflet/dist/leaflet.css';
 import { statesData } from './data';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
+import customMarkerIcon from './pin_fingerup.png'; // Importe a imagem do marcador personalizado
 
 function Map() {
   const navigate = useNavigate();
@@ -99,9 +98,9 @@ function Map() {
 
       {/* Adiciona o marcador na localização atual */}
       {currentLocation && (
-        <Marker position={currentLocation} icon={<FontAwesomeIcon icon={faLocationDot} />}>
-        <Popup>
-            <p>Você está aqui, tioooo!</p>
+        <Marker position={currentLocation} icon={customMarkerIcon}>
+          <Popup>
+            <p>Sua localização atual</p>
           </Popup>
         </Marker>
       )}
