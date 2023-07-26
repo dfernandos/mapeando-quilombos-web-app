@@ -1,5 +1,4 @@
 {
-  "homepage": "https://dfernandos.github.io/mapeando-quilombos-web-app/",
   "name": "mapeando-quilombos-app",
   "version": "0.1.0",
   "private": true,
@@ -25,9 +24,7 @@
     "start": "NODE_OPTIONS=--max_old_space_size=4096 react-scripts start",
     "build": "NODE_OPTIONS=--max_old_space_size=4096 react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -48,7 +45,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "gh-pages": "^5.0.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
