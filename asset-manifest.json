@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mapeando-quilombos-web-app/static/css/main.005981e0.css",
+    "main.js": "/mapeando-quilombos-web-app/static/js/main.71f46160.js",
+    "index.html": "/mapeando-quilombos-web-app/index.html",
+    "main.005981e0.css.map": "/mapeando-quilombos-web-app/static/css/main.005981e0.css.map",
+    "main.71f46160.js.map": "/mapeando-quilombos-web-app/static/js/main.71f46160.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.005981e0.css",
+    "static/js/main.71f46160.js"
+  ]
+}
