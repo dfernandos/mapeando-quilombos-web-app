@@ -8,7 +8,7 @@ function Territorio() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/territory-svc/territory/${id}`)
+      .get(`https://territory-svc-production.up.railway.app/api/territory-svc/territory/${id}`)
       .then((response) => {
         setTerritory(response.data);
       })

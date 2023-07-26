@@ -22,7 +22,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
       if (territoryId) {
         // Fetch the data for the specific territory using the territoryId
         axios
-          .get(`http://localhost:8080/api/territory-svc/territory/${territoryId}`)
+          .get(`https://territory-svc-production.up.railway.app/api/territory-svc/territory/${territoryId}`)
           .then((response) => {
             const territoryData = response.data;
             // Update the form data with the fetched territory data
@@ -97,11 +97,11 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         try {
           if (territoryId) {
             // If territoryId is present, it means we are updating an existing territory
-            await axios.put(`http://localhost:8080/api/territory-svc/territory/update/${territoryId}`, formData);
+            await axios.put(`https://territory-svc-production.up.railway.app/api/territory-svc/territory/update/${territoryId}`, formData);
             console.log('Território atualizado com sucesso!');
           } else {
             // If territoryId is not present, it means we are saving a new territory
-            await axios.post('http://localhost:8080/api/territory-svc/territory/create', formData);
+            await axios.post('https://territory-svc-production.up.railway.app/api/territory-svc/territory/create', formData);
             console.log('Território cadastrado com sucesso!');
           }
           navigate('/GestaoConteudo');

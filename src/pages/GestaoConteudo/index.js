@@ -17,7 +17,7 @@ function GestaoConteudo() {
 
   useEffect(() => {
     function loadApi() {
-      let url = "http://localhost:8080/api/territory-svc/territory/all";
+      let url = "https://territory-svc-production.up.railway.app/api/territory-svc/territory/all";
 
       fetch(url)
         .then((result) => result.json())
@@ -44,7 +44,7 @@ function GestaoConteudo() {
 
   function handleDeleteConfirm() {
     const territoryId = territoryToDelete;
-    axios.delete(`http://localhost:8080/api/territory-svc/territory/${territoryId}`)
+    axios.delete(`https://territory-svc-production.up.railway.app/api/territory-svc/territory/${territoryId}`)
       .then((response) => {
         console.log('Território deletado com sucesso!');
         const updatedTerritories = territories.filter((territory) => territory.id !== territoryId);
