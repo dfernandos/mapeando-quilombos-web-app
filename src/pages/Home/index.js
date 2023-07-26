@@ -1,12 +1,14 @@
 import React,{useState, useEffect} from 'react';
 import './style.css'
+import Map from '../../components/Map';
 
 function Home() {
 
   
   return(
     <div className='container'>
-      <h1> Homiiii</h1>
+      <h1> Mapa dos Quilombos de Porto Alegre</h1>
+      <Map />
     </div>
   );
 }
