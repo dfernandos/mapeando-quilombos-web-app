@@ -6,10 +6,20 @@ import {
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { statesData } from './data';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 const center = [-30.050890, -51.218222];
 
 function Map() {
+
+
+    const navigate = useNavigate();
+  
+    function getTerritory(territoryId) {
+      console.log(`Ícone clicado para o território com ID: ${territoryId}`);
+      navigate(`/territorio/${territoryId}`, { replace: true }); // Navega para a página de edição com o territoryId como parâmetro de rota
+    }
   return (
     <MapContainer
       center={center}
@@ -56,9 +66,7 @@ function Map() {
                   fillColor: '#FD8D3C'
                 });
               },
-              click: (e) => {
-
-              }
+              click: () => getTerritory(state.id), // Chama getTerritory apenas no clique do polígono
             }}
           />)
         })
