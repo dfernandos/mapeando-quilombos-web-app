@@ -92,9 +92,6 @@ useEffect(() => {
 }, [currentLocation, center]);
 
 
-// Chamando a função para calcular a distância
-calculateDistanceBetweenCenterAndCurrentLocation();
-
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
