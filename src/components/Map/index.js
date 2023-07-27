@@ -32,15 +32,12 @@ const [center, setCenter] = useState([-30.050890, -51.218222]);
 const [currentLocation, setCurrentLocation] = useState(null);
 
 useEffect(() => {
-  // Verifica se o navegador suporta a API de geolocalização
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // Obtém as coordenadas da geolocalização
         const { latitude, longitude } = position.coords;
-        // Atualiza o centro do mapa com as coordenadas da geolocalização
+        console.log('Localização obtida:', latitude, longitude); // Verifique se os valores estão sendo mostrados corretamente no console
         setCenter([latitude, longitude]);
-        // Define a localização atual para exibir o marcador
         setCurrentLocation([latitude, longitude]);
       },
       (error) => {
