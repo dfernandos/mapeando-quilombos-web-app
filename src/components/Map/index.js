@@ -27,6 +27,7 @@ function Map() {
   const [currentLocation, setCurrentLocation] = useState(null);
 
   // Suponha que você tenha a função calculateDistance definida aqui
+  // eslint-disable-next-line
   function calculateDistance(lat1, lon1, lat2, lon2) {
     const earthRadiusKm = 6371;
     const dLat = deg2rad(lat2 - lat1);
@@ -59,7 +60,7 @@ function Map() {
       setDistanceBetweenCenterAndCurrentLocation(null);
     }
     // eslint-disable-next-line
-  }, [center, currentLocation]);
+  }, [center, currentLocation, calculateDistance]); // Adicione calculateDistance como dependência aqui
 
   // useEffect para obter as coordenadas da geolocalização
   useEffect(() => {
@@ -78,15 +79,10 @@ function Map() {
     } else {
       console.error('Geolocalização não suportada pelo navegador.');
     }
-
-    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do primeiro useEffect
-    calculateDistanceBetweenCenterAndCurrentLocation();
-
-  }, [calculateDistanceBetweenCenterAndCurrentLocation]);
+  }, []); // Sem dependências, para ser executado apenas uma vez
 
   // useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
   useEffect(() => {
-    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do segundo useEffect
     calculateDistanceBetweenCenterAndCurrentLocation();
   }, [currentLocation, center, calculateDistanceBetweenCenterAndCurrentLocation]);
 
