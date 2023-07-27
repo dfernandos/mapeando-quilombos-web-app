@@ -7,12 +7,21 @@ import {
   Popup
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import L, { Icon } from "leaflet";
 import { statesData } from './data';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
 
-import customMarkerIcon from './pin_fingerup.png'; // Importe a imagem do marcador personalizado
 
 function Map() {
+
+  const customIcon = new Icon({
+    // iconUrl: "https://cdn-icons-png.flaticon.com/512/447/447031.png",
+    iconUrl: require("./pin_fingerup.png"),
+    iconSize: [38, 38] // size of the icon
+  });
+
   const navigate = useNavigate();
   const [center, setCenter] = useState([-30.050890, -51.218222]);
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -98,9 +107,10 @@ function Map() {
 
       {/* Adiciona o marcador na localização atual */}
       {currentLocation && (
-        <Marker position={currentLocation} icon={customMarkerIcon}>
+        <Marker position={currentLocation} icon={customIcon}>
           <Popup>
-            <p>Sua localização atual</p>
+            <p>Você está aqui</p>
+            <FontAwesomeIcon icon={faFaceSmile} />
           </Popup>
         </Marker>
       )}
