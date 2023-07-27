@@ -94,7 +94,10 @@ useEffect(() => {
   };
 
   calculateDistanceAndSet();
+
+  // Chame a função calculateDistanceAndSet sempre que a posição atual ou o centro mudar
 }, [currentLocation, center]);
+
 
 // Chamando a função para calcular a distância
 calculateDistanceBetweenCenterAndCurrentLocation();
