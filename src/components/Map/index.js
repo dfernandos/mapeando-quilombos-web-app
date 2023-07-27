@@ -85,7 +85,7 @@ function calculateDistanceBetweenCenterAndCurrentLocation() {
 }
 
 // Chamando a função para calcular a distância
-calculateDistanceBetweenCenterAndCurrentLocation();
+const distanceBetweenCenterAndCurrentLocation = calculateDistanceBetweenCenterAndCurrentLocation();
 
 
   function getTerritory(territoryId) {
@@ -151,6 +151,7 @@ calculateDistanceBetweenCenterAndCurrentLocation();
         <Marker position={currentLocation} icon={customIcon}>
           <Popup>
             <p>Você está aqui</p>
+            <p>Distancia do centro é: {distanceBetweenCenterAndCurrentLocation}</p>
             <FontAwesomeIcon icon={faFaceSmile} />
           </Popup>
         </Marker>
