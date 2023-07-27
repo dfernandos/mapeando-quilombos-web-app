@@ -22,29 +22,71 @@ function Map() {
   });
 
   const navigate = useNavigate();
-  const [center, setCenter] = useState([-30.050890, -51.218222]);
-  const [currentLocation, setCurrentLocation] = useState(null);
 
-  useEffect(() => {
-    // Verifica se o navegador suporta a API de geolocalização
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          // Obtém as coordenadas da geolocalização
-          const { latitude, longitude } = position.coords;
-          // Atualiza o centro do mapa com as coordenadas da geolocalização
-          setCenter([latitude, longitude]);
-          // Define a localização atual para exibir o marcador
-          setCurrentLocation([latitude, longitude]);
-        },
-        (error) => {
-          console.error('Erro ao obter a geolocalização:', error);
-        }
-      );
-    } else {
-      console.error('Geolocalização não suportada pelo navegador.');
-    }
-  }, []);
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+  
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const earthRadiusKm = 6371;
+  
+    const dLat = deg2rad(lat2 - lat1);
+    const dLon = deg2rad(lon2 - lon1);
+  
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  
+    const distance = earthRadiusKm * c;
+    return distance;
+  }   
+
+// Suponha que você tenha a função calculateDistance definida aqui
+
+const [center, setCenter] = useState([-30.050890, -51.218222]);
+const [currentLocation, setCurrentLocation] = useState(null);
+
+useEffect(() => {
+  // Verifica se o navegador suporta a API de geolocalização
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // Obtém as coordenadas da geolocalização
+        const { latitude, longitude } = position.coords;
+        // Atualiza o centro do mapa com as coordenadas da geolocalização
+        setCenter([latitude, longitude]);
+        // Define a localização atual para exibir o marcador
+        setCurrentLocation([latitude, longitude]);
+      },
+      (error) => {
+        console.error('Erro ao obter a geolocalização:', error);
+      }
+    );
+  } else {
+    console.error('Geolocalização não suportada pelo navegador.');
+  }
+}, []);
+
+// Função para calcular a distância entre center e currentLocation
+function calculateDistanceBetweenCenterAndCurrentLocation() {
+  if (center && currentLocation) {
+    const [latitudeCenter, longitudeCenter] = center;
+    const [latitudeCurrent, longitudeCurrent] = currentLocation;
+
+    const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
+    console.log(`Distância entre center e currentLocation: ${distance} km`);
+    // Faça o que quiser com a distância calculada aqui
+    return distance; // Retornar a distância se precisar usá-la em outros lugares
+  } else {
+    console.error('Localização atual não disponível.');
+    return null; // Ou retorne null ou outro valor adequado se a localização não estiver disponível
+  }
+}
+
+// Chamando a função para calcular a distância
+const distanceBetweenCenterAndCurrentLocation = calculateDistanceBetweenCenterAndCurrentLocation();
+
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
