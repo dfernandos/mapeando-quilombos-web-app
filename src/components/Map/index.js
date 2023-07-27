@@ -23,6 +23,9 @@ function Map() {
 
   const navigate = useNavigate();
 
+  const [distanceBetweenCenterAndCurrentLocation, setDistanceBetweenCenterAndCurrentLocation] = useState(null);
+
+
   function deg2rad(deg) {
     return deg * (Math.PI / 180);
   }
@@ -84,8 +87,13 @@ function calculateDistanceBetweenCenterAndCurrentLocation() {
   }
 }
 
+useEffect(() => {
+  const distance = calculateDistanceBetweenCenterAndCurrentLocation();
+  setDistanceBetweenCenterAndCurrentLocation(distance);
+}, [currentLocation, center]);
+
 // Chamando a função para calcular a distância
-const distanceBetweenCenterAndCurrentLocation = calculateDistanceBetweenCenterAndCurrentLocation();
+calculateDistanceBetweenCenterAndCurrentLocation();
 
 
   function getTerritory(territoryId) {
