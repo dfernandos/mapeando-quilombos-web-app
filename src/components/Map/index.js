@@ -50,10 +50,6 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-
-  function deg2rad(deg) {
-    return deg * (Math.PI / 180);
-  }
   
   function calculateDistance(lat1, lon1, lat2, lon2) {
     const earthRadiusKm = 6371;
