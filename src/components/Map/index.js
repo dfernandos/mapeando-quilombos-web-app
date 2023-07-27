@@ -49,6 +49,8 @@ function deg2rad(deg) {
 const [center, setCenter] = useState([-30.050890, -51.218222]);
 const [currentLocation, setCurrentLocation] = useState(null);
 
+// ...
+
 
 
 function calculateDistanceBetweenCenterAndCurrentLocation() {
@@ -65,31 +67,34 @@ function calculateDistanceBetweenCenterAndCurrentLocation() {
   }
 }
 
-// useEffect para obter as coordenadas da geolocalização
-useEffect(() => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        console.log('Localização obtida:', latitude, longitude);
-        setCenter([latitude, longitude]);
-        setCurrentLocation([latitude, longitude]);
-      },
-      (error) => {
-        console.error('Erro ao obter a geolocalização:', error);
-      }
-    );
-  } else {
-    console.error('Geolocalização não suportada pelo navegador.');
-  }
-}, []);
+// ...
 
-// useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
+  // useEffect para obter as coordenadas da geolocalização
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log('Localização obtida:', latitude, longitude);
+          setCenter([latitude, longitude]);
+          setCurrentLocation([latitude, longitude]);
+        },
+        (error) => {
+          console.error('Erro ao obter a geolocalização:', error);
+        }
+      );
+    } else {
+      console.error('Geolocalização não suportada pelo navegador.');
+    }
+  }, []);
 
-  calculateDistanceBetweenCenterAndCurrentLocation();
-
+  // useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
+  useEffect(() => {
+    calculateDistanceBetweenCenterAndCurrentLocation();
+  }, [currentLocation, center]);
 
 // ...
+
 
 
 
