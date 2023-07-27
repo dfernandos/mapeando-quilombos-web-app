@@ -7,7 +7,7 @@ import {
   Popup
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import L, { Icon } from "leaflet";
+import { Icon } from "leaflet";
 import { statesData } from './data';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
