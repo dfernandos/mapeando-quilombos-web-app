@@ -28,15 +28,50 @@ function Map() {
 
 // Suponha que você tenha a função calculateDistance definida aqui
 
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const earthRadiusKm = 6371;
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  const distance = earthRadiusKm * c;
+  return distance;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+
 const [center, setCenter] = useState([-30.050890, -51.218222]);
 const [currentLocation, setCurrentLocation] = useState(null);
 
+
+
+function calculateDistanceBetweenCenterAndCurrentLocation() {
+  if (center && currentLocation) {
+    const [latitudeCenter, longitudeCenter] = center;
+    const [latitudeCurrent, longitudeCurrent] = currentLocation;
+
+    const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
+    console.log(`Distância entre center lat: ${latitudeCenter} long: ${longitudeCenter} e currentLocation: ${latitudeCurrent} : ${longitudeCurrent} ${distance} km`);
+    setDistanceBetweenCenterAndCurrentLocation(distance);
+  } else {
+    console.error('Localização atual não disponível.');
+    setDistanceBetweenCenterAndCurrentLocation(null);
+  }
+}
+
+// useEffect para obter as coordenadas da geolocalização
 useEffect(() => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        console.log('Localização obtida:', latitude, longitude); // Verifique se os valores estão sendo mostrados corretamente no console
+        console.log('Localização obtida:', latitude, longitude);
         setCenter([latitude, longitude]);
         setCurrentLocation([latitude, longitude]);
       },
@@ -49,50 +84,13 @@ useEffect(() => {
   }
 }, []);
 
-useEffect(() => {
-  
-  function calculateDistance(lat1, lon1, lat2, lon2) {
-    const earthRadiusKm = 6371;
-  
-    const dLat = rad2deg(lat2 - lat1);
-    const dLon = rad2deg(lon2 - lon1);
-  
-    const a =
-      Math.sin(deg2rad(dLat) / 2) * Math.sin(deg2rad(dLat) / 2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(deg2rad(dLon) / 2) * Math.sin(deg2rad(dLon) / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  
-    const distance = earthRadiusKm * c;
-    return distance;
-  }
-  
-  function deg2rad(deg) {
-    return deg * (Math.PI / 180);
-  }
-  
-  function rad2deg(rad) {
-    return rad * (180 / Math.PI);
-  }
-  
-     
-  function calculateDistanceBetweenCenterAndCurrentLocation() {
-    if (center && currentLocation) {
-      const [latitudeCenter, longitudeCenter] = center;
-      const [latitudeCurrent, longitudeCurrent] = currentLocation;
-  
-      const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
-      console.log(`Distância entre center lat: ${latitudeCenter} long: ${longitudeCenter} e currentLocation: ${latitudeCurrent} : ${longitudeCurrent} ${distance} km`);
-      setDistanceBetweenCenterAndCurrentLocation(distance);
-    } else {
-      console.error('Localização atual não disponível.');
-      setDistanceBetweenCenterAndCurrentLocation(null);
-    }
-  }
+// useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
 
-  // Chame a função de cálculo sempre que a posição atual ou o centro mudar
   calculateDistanceBetweenCenterAndCurrentLocation();
 
-}, [currentLocation, center]);
+
+// ...
+
 
 
 
