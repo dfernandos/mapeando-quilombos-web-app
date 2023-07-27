@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import TerritorioDetalhes from '../../components/TerritorioDetalhes';
+import './style.css'
 function Territorio() {
   const [territory, setTerritory] = useState(null);
   const { id } = useParams();
@@ -18,7 +19,9 @@ function Territorio() {
   }, [id]);
 
   if (!territory) {
-    return <div>Loading...</div>;
+    return <div className='container'>
+      <h1>Não há conteúdo para este teritório</h1>
+    </div>;
   }
 
   return (

@@ -172,7 +172,6 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
 
   return (
     <div className='form-container'>
-      <h2>Cadastro de Território</h2>
       {formData.error && <p>{formData.error}</p>}
       <form onSubmit={handleSave} encType="multipart/form-data" className="blabla">
         <label>Nome:</label>

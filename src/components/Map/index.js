@@ -17,7 +17,6 @@ import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
 function Map() {
 
   const customIcon = new Icon({
-    // iconUrl: "https://cdn-icons-png.flaticon.com/512/447/447031.png",
     iconUrl: require("./pin_fingerup.png"),
     iconSize: [38, 38] // size of the icon
   });
@@ -69,7 +68,7 @@ function Map() {
           return (<Polygon
             key={state.id}
             pathOptions={{
-              fillColor: '#FD8D3C',
+              fillColor: '#a06b6b',
               fillOpacity: 0.7,
               weight: 2,
               opacity: 1,
@@ -82,7 +81,7 @@ function Map() {
                 const layer = e.target;
                 layer.setStyle({
                   dashArray: "",
-                  fillColor: "#BD0026",
+                  fillColor: "#bc8f8f",
                   fillOpacity: 0.7,
                   weight: 2,
                   opacity: 1,
@@ -96,7 +95,7 @@ function Map() {
                   weight: 2,
                   dashArray: "3",
                   color: 'white',
-                  fillColor: '#FD8D3C'
+                  fillColor: '#a06b6b'
                 });
               },
               click: () => getTerritory(state.id), // Chama getTerritory apenas no clique do polígono

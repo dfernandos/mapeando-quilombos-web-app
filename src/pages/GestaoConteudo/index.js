@@ -6,12 +6,19 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CustomAlert from '../../components/CustomAlert';
 import { useNavigate, Link } from 'react-router-dom';
+import Breadcrumb from '../../components/Breadcrumb';
+import Loading from 'react-loading';
 
 function GestaoConteudo() {
   const [territories, setTerritories] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
   const [territoryToDelete, setTerritoryToDelete] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); 
 
+  const breadcrumbItems = [
+    { label: 'Home', link: '/' },
+    { label: 'Gestão de Conteúdo', link: null },
+  ];
 
   const navigate = useNavigate();
 
@@ -24,8 +31,12 @@ function GestaoConteudo() {
         .then((json) => {
           console.log(json);
           setTerritories(json);
+          setIsLoading(false); // Quando os dados são carregados, definimos isLoading para false
         })
-        .catch((error) => console.error("Erro ao carregar os territórios:", error));
+        .catch((error) => {
+          console.error("Erro ao carregar os territórios:", error);
+          setIsLoading(false); // Em caso de erro, também definimos isLoading para false
+        });
     }
 
     loadApi();
@@ -66,41 +77,50 @@ function GestaoConteudo() {
 
   return (
     <div className='container'>
-        <div className='header'>
+      <Breadcrumb items={breadcrumbItems} />
+  
+      <div className='header'>
         <h1>Lista de Territórios Quilombolas</h1>
         <Link to="/cadastro" className="botao">+ Adicionar</Link>
-        </div>
-        
-      {territories.map((item) => {
-        return (
-          <article key={item.id} className='content'>
-            <div className="headerItem">
-              <strong className="nome">{item.name}</strong>
-              <div className="button-container">
-                <button onClick={() => handleEditClick(item.id)}>
-                  <FontAwesomeIcon icon={faPenToSquare} className="icon" />
-                </button>
-                <button onClick={() => handleDeleteClick(item.id)}>
-                  <FontAwesomeIcon icon={faTrash} className="icon" />
-                </button>
-              </div>
-            </div>
-            <img src={`data:image/jpeg;base64, ${item.mainImage}`} alt={item.name} className="capa" />
-            <p>{item.briefDescription}</p>
-            <Link to={`/territorio/${item.id}`} className="botao">Acessar</Link>
+      </div>
   
-            {showAlert && territoryToDelete === item.id && (
-              <CustomAlert
-                message="Tem certeza que deseja deletar este território?"
-                onConfirm={handleDeleteConfirm}
-                onCancel={handleDeleteCancel}
-              />
-            )}
-          </article>
-        );
-      })}
+      {isLoading ? (
+        <div className="loading-container">
+          <Loading type="spin" color="#a06b6b" />
+        </div>
+      ) : (
+        <>
+          {territories.map((item) => (
+            <article key={item.id} className='content'>
+              <div className="headerItem">
+                <strong className="nome">{item.name}</strong>
+                <div className="button-container">
+                  <button onClick={() => handleEditClick(item.id)}>
+                    <FontAwesomeIcon icon={faPenToSquare} className="icon" />
+                  </button>
+                  <button onClick={() => handleDeleteClick(item.id)}>
+                    <FontAwesomeIcon icon={faTrash} className="icon" />
+                  </button>
+                </div>
+              </div>
+              <img src={`data:image/jpeg;base64, ${item.mainImage}`} alt={item.name} className="capa" />
+              <p>{item.briefDescription}</p>
+              <Link to={`/territorio/${item.id}`} className="botao">Acessar</Link>
+  
+              {showAlert && territoryToDelete === item.id && (
+                <CustomAlert
+                  message="Tem certeza que deseja deletar este território?"
+                  onConfirm={handleDeleteConfirm}
+                  onCancel={handleDeleteCancel}
+                />
+              )}
+            </article>
+          ))}
+        </>
+      )}
     </div>
   );
+  
 }
 
 export default GestaoConteudo;

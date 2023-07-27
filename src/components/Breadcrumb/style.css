@@ -1,0 +1,23 @@
+.breadcrumb {
+    background-color: #f7eaea;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  
+  .breadcrumb-item {
+    display: inline;
+  }
+  
+  .breadcrumb-item:not(:last-child):after {
+    content: '/';
+    margin: 0 8px;
+    color: #aaa;
+  }
+  
+  .breadcrumb-item:last-child {
+    color: #333;
+    font-weight: bold;
+  }
+  
