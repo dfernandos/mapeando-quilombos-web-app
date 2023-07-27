@@ -71,31 +71,24 @@ useEffect(() => {
   }
 }, []);
 
-// Função para calcular a distância entre center e currentLocation
-function calculateDistanceBetweenCenterAndCurrentLocation() {
-  if (center && currentLocation) {
-    const [latitudeCenter, longitudeCenter] = center;
-    const [latitudeCurrent, longitudeCurrent] = currentLocation;
-
-    const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
-    console.log(`Distância entre center e currentLocation: ${distance} km`);
-    // Faça o que quiser com a distância calculada aqui
-    return distance; // Retornar a distância se precisar usá-la em outros lugares
-  } else {
-    console.error('Localização atual não disponível.');
-    return null; // Ou retorne null ou outro valor adequado se a localização não estiver disponível
-  }
-}
-
 useEffect(() => {
-  const calculateDistanceAndSet = () => {
-    const distance = calculateDistanceBetweenCenterAndCurrentLocation();
-    setDistanceBetweenCenterAndCurrentLocation(distance);
-  };
+  function calculateDistanceBetweenCenterAndCurrentLocation() {
+    if (center && currentLocation) {
+      const [latitudeCenter, longitudeCenter] = center;
+      const [latitudeCurrent, longitudeCurrent] = currentLocation;
 
-  calculateDistanceAndSet();
+      const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
+      console.log(`Distância entre center e currentLocation: ${distance} km`);
+      setDistanceBetweenCenterAndCurrentLocation(distance);
+    } else {
+      console.error('Localização atual não disponível.');
+      setDistanceBetweenCenterAndCurrentLocation(null);
+    }
+  }
 
-  // Chame a função calculateDistanceAndSet sempre que a posição atual ou o centro mudar
+  // Chame a função de cálculo sempre que a posição atual ou o centro mudar
+  calculateDistanceBetweenCenterAndCurrentLocation();
+
 }, [currentLocation, center]);
 
 
