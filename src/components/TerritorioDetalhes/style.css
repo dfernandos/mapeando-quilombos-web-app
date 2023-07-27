@@ -1,58 +1,60 @@
 .territorio-detalhes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center the content horizontally */
-    gap: 20px;
-  }
-
-.territorio-info{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 800px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-    margin: 8px;
-    padding: 20px;
-    background: #f7eaea;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the content horizontally */
+  gap: 20px;
 }
-  
-  .territorio-detalhes h2 {
-    margin-top: 0;
-    text-align: center;
-  }
-  
-  .territorio-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .territorio-header img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-  
-  .territorio-info {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .territorio-text {
-    flex: 1;
-  }
-  
-  .territorio-text h3 {
-    margin: 0;
-    margin-top: 10px;
-    font-size: 18px;
-  }
-  
-  .territorio-text p {
-    margin-top: 5px;
-    text-align: justify;
-  }
-  
+
+.territorio-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+  margin: 8px;
+  padding: 20px;
+  background: #f7eaea;
+}
+
+.territorio-detalhes h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.territorio-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.territorio-header img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 20px; /* Adicionar espaçamento na parte inferior da imagem */
+}
+
+.territorio-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.territorio-text {
+  flex: 1;
+}
+
+.territorio-text h3 {
+  margin: 0;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.territorio-text p {
+  margin-top: 5px;
+  text-align: justify;
+}
+
+

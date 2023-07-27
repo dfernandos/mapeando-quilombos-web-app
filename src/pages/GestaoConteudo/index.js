@@ -3,11 +3,13 @@ import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import CustomAlert from '../../components/CustomAlert';
 import { useNavigate, Link } from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from 'react-loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import api from '../../Api';
 
 function GestaoConteudo() {
   const [territories, setTerritories] = useState([]);
@@ -23,20 +25,19 @@ function GestaoConteudo() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    function loadApi() {
-      let url = "https://territory-svc-production.up.railway.app/api/territory-svc/territory/all";
+    async function loadApi() {
 
-      fetch(url)
-        .then((result) => result.json())
-        .then((json) => {
-          console.log(json);
-          setTerritories(json);
-          setIsLoading(false); // Quando os dados são carregados, definimos isLoading para false
-        })
-        .catch((error) => {
-          console.error("Erro ao carregar os territórios:", error);
-          setIsLoading(false); // Em caso de erro, também definimos isLoading para false
-        });
+      try {
+        const response = await api.get('/territory/all'); 
+        console.log(response.data);
+        setTerritories(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Erro ao carregar os territórios:", error);
+        toast.error('Ocorreu um erro ao carregar os territórios. Por favor, tente novamente mais tarde.');
+
+        setIsLoading(false);
+      }
     }
 
     loadApi();
@@ -55,14 +56,17 @@ function GestaoConteudo() {
 
   function handleDeleteConfirm() {
     const territoryId = territoryToDelete;
-    axios.delete(`https://territory-svc-production.up.railway.app/api/territory-svc/territory/${territoryId}`)
+    api.delete(`/territory/${territoryId}`)
       .then((response) => {
         console.log('Território deletado com sucesso!');
+        toast.success('Território deletado com sucesso!');
         const updatedTerritories = territories.filter((territory) => territory.id !== territoryId);
         setTerritories(updatedTerritories);
       })
       .catch((error) => {
         console.error('Erro ao deletar o território:', error);
+        toast.error('Erro ao deletar o território. Por favor, tente novamente mais tarde.');
+
       })
       .finally(() => {
         setShowAlert(false);
@@ -78,6 +82,7 @@ function GestaoConteudo() {
   return (
     <div className='container'>
       <Breadcrumb items={breadcrumbItems} />
+      <ToastContainer />
   
       <div className='header'>
         <h1>Lista de Territórios Quilombolas</h1>

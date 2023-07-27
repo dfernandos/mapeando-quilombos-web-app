@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import TerritorioDetalhes from '../../components/TerritorioDetalhes';
 import './style.css'
+import api from '../../Api';
 function Territorio() {
   const [territory, setTerritory] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`https://territory-svc-production.up.railway.app/api/territory-svc/territory/${id}`)
+    api
+      .get(`/territory/${id}`)
       .then((response) => {
         setTerritory(response.data);
       })

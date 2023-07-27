@@ -6,8 +6,8 @@ function TerritorioDetalhes({ territory }) {
     <div className="territorio-detalhes">
       <div className="territorio-info">
         <div className="territorio-header">
-            <h2>{territory.name}</h2>
-            <img src={`data:image/jpeg;base64, ${territory.mainImage}`} alt={territory.name} className="capa" />
+          <h2>{territory.name}</h2>
+          <img src={`data:image/jpeg;base64, ${territory.mainImage}`} alt={territory.name} className="capa" />
         </div>
         <div className="territorio-text">
           <h3>Descrição:</h3>

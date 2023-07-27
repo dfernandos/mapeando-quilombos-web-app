@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import api from '../../Api';
 
 
 function Form({ territoryData, territoryId, onFormSubmit }) {
   const navigate = useNavigate(); 
+
+  const [isActionSuccess, setIsActionSuccess] = useState(false);
+
     const [formData, setFormData] = useState({
       name: "",
       briefDescription: "",
@@ -18,11 +23,19 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
       error: "",
     });
   
+
+    useEffect(() => {
+      if (isActionSuccess) {
+        toast.success('Território cadastrado com sucesso!');
+        setIsActionSuccess(false); // Reseta o estado para evitar que o toast seja exibido novamente ao navegar entre páginas
+      }
+    }, [isActionSuccess]);
+  
     useEffect(() => {
       if (territoryId) {
         // Fetch the data for the specific territory using the territoryId
-        axios
-          .get(`https://territory-svc-production.up.railway.app/api/territory-svc/territory/${territoryId}`)
+        api
+          .get(`/territory/${territoryId}`)
           .then((response) => {
             const territoryData = response.data;
             // Update the form data with the fetched territory data
@@ -114,6 +127,9 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         setImagePreview(`data:image/jpeg;base64, ${formData.mainImage}`);
       }
     }, [formData.mainImage]);
+
+    
+
   
     async function handleSave(event) {
       event.preventDefault();
@@ -135,12 +151,15 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         try {
           if (territoryId) {
             // If territoryId is present, it means we are updating an existing territory
-            await axios.put(`https://territory-svc-production.up.railway.app/api/territory-svc/territory/update/${territoryId}`, formData);
+            await api.put(`/territory/update/${territoryId}`, formData);
             console.log('Território atualizado com sucesso!');
+            toast.success('Território editado com sucesso!');
+
           } else {
             // If territoryId is not present, it means we are saving a new territory
-            await axios.post('https://territory-svc-production.up.railway.app/api/territory-svc/territory/create', formData);
+            await api.post('/territory/create', formData);
             console.log('Território cadastrado com sucesso!');
+            toast.success('Território cadastrado com sucesso!');
           }
           navigate('/GestaoConteudo');
 
@@ -162,19 +181,21 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
             error: ""
           });
         } catch (error) {
+          toast.error('Erro ao enviar os dados. Por favor, tente novamente mais tarde.');
           console.error('Erro ao enviar os dados:', error);
           console.error('Erro ao enviar os dados:', error.response);
         }
       } else {
-        setFormData({ ...formData, error: 'Por favor, preencha todos os campos antes de enviar.' });
+        setFormData({ ...formData, error: 'Por favor, preencha todos os campos antes de salvar.' });
       }
     }
+    
 
   return (
     <div className='form-container'>
-      {formData.error && <p>{formData.error}</p>}
-      <form onSubmit={handleSave} encType="multipart/form-data" className="blabla">
-        <label>Nome:</label>
+      {formData.error && <p className='error'>{formData.error} {window.scrollTo(0, 0)}</p>}
+      <form onSubmit={handleSave} encType="multipart/form-data">
+      <label> Nome:</label>
         <input
         type="text"
         value={formData.name} 
@@ -233,7 +254,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           value={formData.map}
           onChange={(event) => setFormData({ ...formData, map: event.target.value })}
         />
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Salvar</button>
       </form>
     </div>
   );

@@ -66,4 +66,11 @@
     max-height: 60%; /* Ajuste a altura máxima da imagem dentro do card aqui */
     object-fit: cover; /* Para garantir que a imagem preencha todo o espaço disponível */
   }
+
+  .error {
+    color: red;
+  }
+  
+
+  
   
