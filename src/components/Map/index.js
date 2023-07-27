@@ -68,7 +68,12 @@ useEffect(() => {
   
     const distance = earthRadiusKm * c;
     return distance;
-  }   
+  }
+  
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+     
   function calculateDistanceBetweenCenterAndCurrentLocation() {
     if (center && currentLocation) {
       const [latitudeCenter, longitudeCenter] = center;
