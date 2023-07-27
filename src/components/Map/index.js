@@ -88,8 +88,12 @@ function calculateDistanceBetweenCenterAndCurrentLocation() {
 }
 
 useEffect(() => {
-  const distance = calculateDistanceBetweenCenterAndCurrentLocation();
-  setDistanceBetweenCenterAndCurrentLocation(distance);
+  const calculateDistanceAndSet = () => {
+    const distance = calculateDistanceBetweenCenterAndCurrentLocation();
+    setDistanceBetweenCenterAndCurrentLocation(distance);
+  };
+
+  calculateDistanceAndSet();
 }, [currentLocation, center]);
 
 // Chamando a função para calcular a distância
