@@ -74,9 +74,9 @@ useEffect(() => {
     if (center && currentLocation) {
       const [latitudeCenter, longitudeCenter] = center;
       const [latitudeCurrent, longitudeCurrent] = currentLocation;
-
+  
       const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
-      console.log(`Distância entre center lat: ${latitudeCenter} long: ${latitudeCenter} e currentLocation: ${latitudeCurrent} : ${longitudeCurrent} ${distance} km`);
+      console.log(`Distância entre center lat: ${latitudeCenter} long: ${longitudeCenter} e currentLocation: ${latitudeCurrent} : ${longitudeCurrent} ${distance} km`);
       setDistanceBetweenCenterAndCurrentLocation(distance);
     } else {
       console.error('Localização atual não disponível.');
