@@ -85,7 +85,7 @@ function calculateDistanceBetweenCenterAndCurrentLocation() {
 }
 
 // Chamando a função para calcular a distância
-const distanceBetweenCenterAndCurrentLocation = calculateDistanceBetweenCenterAndCurrentLocation();
+calculateDistanceBetweenCenterAndCurrentLocation();
 
 
   function getTerritory(territoryId) {
