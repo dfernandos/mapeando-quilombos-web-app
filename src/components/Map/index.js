@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -13,9 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
 
-
 function Map() {
-
   const customIcon = new Icon({
     iconUrl: require("./pin_fingerup.png"),
     iconSize: [38, 38] // size of the icon
@@ -25,49 +23,43 @@ function Map() {
 
   const [distanceBetweenCenterAndCurrentLocation, setDistanceBetweenCenterAndCurrentLocation] = useState(null);
 
+  const [center, setCenter] = useState([-30.050890, -51.218222]);
+  const [currentLocation, setCurrentLocation] = useState(null);
 
-// Suponha que você tenha a função calculateDistance definida aqui
+  // Suponha que você tenha a função calculateDistance definida aqui
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const earthRadiusKm = 6371;
+    const dLat = deg2rad(lat2 - lat1);
+    const dLon = deg2rad(lon2 - lon1);
 
-function calculateDistance(lat1, lon1, lat2, lon2) {
-  const earthRadiusKm = 6371;
-  const dLat = deg2rad(lat2 - lat1);
-  const dLon = deg2rad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  const distance = earthRadiusKm * c;
-  return distance;
-}
-
-function deg2rad(deg) {
-  return deg * (Math.PI / 180);
-}
-
-const [center, setCenter] = useState([-30.050890, -51.218222]);
-const [currentLocation, setCurrentLocation] = useState(null);
-
-// ...
-
-
-
-function calculateDistanceBetweenCenterAndCurrentLocation() {
-  if (center && currentLocation) {
-    const [latitudeCenter, longitudeCenter] = center;
-    const [latitudeCurrent, longitudeCurrent] = currentLocation;
-
-    const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
-    console.log(`Distância entre center lat: ${latitudeCenter} long: ${longitudeCenter} e currentLocation: ${latitudeCurrent} : ${longitudeCurrent} ${distance} km`);
-    setDistanceBetweenCenterAndCurrentLocation(distance);
-  } else {
-    console.error('Localização atual não disponível.');
-    setDistanceBetweenCenterAndCurrentLocation(null);
+    const distance = earthRadiusKm * c;
+    return distance;
   }
-}
 
-// ...
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+
+  // Declare a função calculateDistanceBetweenCenterAndCurrentLocation
+  const calculateDistanceBetweenCenterAndCurrentLocation = useCallback(() => {
+    if (center && currentLocation) {
+      const [latitudeCenter, longitudeCenter] = center;
+      const [latitudeCurrent, longitudeCurrent] = currentLocation;
+
+      const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
+      console.log(`Distância entre center lat: ${latitudeCenter} long: ${longitudeCenter} e currentLocation: ${latitudeCurrent} : ${longitudeCurrent} ${distance} km`);
+      setDistanceBetweenCenterAndCurrentLocation(distance);
+    } else {
+      console.error('Localização atual não disponível.');
+      setDistanceBetweenCenterAndCurrentLocation(null);
+    }
+    // eslint-disable-next-line
+  }, [center, currentLocation]);
 
   // useEffect para obter as coordenadas da geolocalização
   useEffect(() => {
@@ -86,18 +78,17 @@ function calculateDistanceBetweenCenterAndCurrentLocation() {
     } else {
       console.error('Geolocalização não suportada pelo navegador.');
     }
-  }, []);
+
+    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do primeiro useEffect
+    calculateDistanceBetweenCenterAndCurrentLocation();
+
+  }, [calculateDistanceBetweenCenterAndCurrentLocation]);
 
   // useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
   useEffect(() => {
+    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do segundo useEffect
     calculateDistanceBetweenCenterAndCurrentLocation();
-  }, [currentLocation, center]);
-
-// ...
-
-
-
-
+  }, [currentLocation, center, calculateDistanceBetweenCenterAndCurrentLocation]);
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
