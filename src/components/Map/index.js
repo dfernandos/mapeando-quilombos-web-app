@@ -23,6 +23,7 @@ function Map() {
 
   const [distanceBetweenCenterAndCurrentLocation, setDistanceBetweenCenterAndCurrentLocation] = useState(null);
 
+  // eslint-disable-next-line
   const [center, setCenter] = useState([-30.050890, -51.218222]);
   const [currentLocation, setCurrentLocation] = useState(null);
 
@@ -68,8 +69,7 @@ function Map() {
         (position) => {
           const { latitude, longitude } = position.coords;
           console.log('Localização obtida:', latitude, longitude);
-          setCenter([latitude, longitude]); // Definindo também o estado do centro aqui
-          setCurrentLocation([latitude, longitude]);
+          setCurrentLocation([latitude, longitude]); // Definindo o estado da localização atual aqui
         },
         (error) => {
           console.error('Erro ao obter a geolocalização:', error);
@@ -80,10 +80,11 @@ function Map() {
     }
   }, []); // Não é necessário adicionar dependências aqui
 
+  // useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
   useEffect(() => {
-    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do primeiro useEffect
+    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do segundo useEffect
     calculateDistanceBetweenCenterAndCurrentLocation();
-  }, [calculateDistanceBetweenCenterAndCurrentLocation]);
+  }, [currentLocation, center, calculateDistanceBetweenCenterAndCurrentLocation]);
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
