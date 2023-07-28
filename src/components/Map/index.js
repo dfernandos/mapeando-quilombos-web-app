@@ -149,8 +149,8 @@ function Map() {
         <Marker position={currentLocation} icon={customIcon}>
           <Popup>
             <p>Você está aqui</p>
-            <p>Distancia do centro é: {distanceBetweenCenterAndCurrentLocation}</p>
-            <FontAwesomeIcon icon={faFaceSmile} />
+            <p>Distancia do centro é: {distanceBetweenCenterAndCurrentLocation} km <FontAwesomeIcon icon={faFaceSmile} /></p>
+            
           </Popup>
         </Marker>
       )}
