@@ -69,7 +69,7 @@ function Map() {
         (position) => {
           const { latitude, longitude } = position.coords;
           console.log('Localização obtida:', latitude, longitude);
-          setCenter([latitude, longitude]);
+          setCenter([latitude, longitude]); // Definindo também o estado do centro aqui
           setCurrentLocation([latitude, longitude]);
         },
         (error) => {
@@ -79,7 +79,11 @@ function Map() {
     } else {
       console.error('Geolocalização não suportada pelo navegador.');
     }
-  }, []); // Sem dependências, para ser executado apenas uma vez
+
+    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do primeiro useEffect
+    calculateDistanceBetweenCenterAndCurrentLocation();
+
+  }, [calculateDistanceBetweenCenterAndCurrentLocation]);
 
   // useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
   useEffect(() => {
