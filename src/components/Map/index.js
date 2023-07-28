@@ -13,11 +13,57 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
 
+
+
 function Map() {
   const customIcon = new Icon({
     iconUrl: require("./pin_fingerup.png"),
     iconSize: [38, 38] // size of the icon
   });
+
+  const customMarkerIcon = new Icon({
+    iconUrl: require("./location-pin.png"),
+    iconSize: [38, 38] // size of the icon
+  });
+
+  const territories = [
+    {
+      name: "Quilombo da Família Silva",
+      latLong: [-30.027164778731652, -51.17204963621945]
+    },
+    {
+      name: "Quilombo dos Alpes",
+      latLong: [-30.092640557901113, -51.193365781330975]
+    },
+    {
+      name: "Quilombo do Areal",
+      latLong: [-30.045023132925397, -51.22538049770927]
+    },
+    {
+      name: "Quilombo dos Fidélix",
+      latLong: [-30.045046843301243, -51.216324117240966]
+    },
+    {
+      name: "Quilombo dos Machado",
+      latLong: [-29.994368335578976, -51.13932757491351]
+    },
+    {
+      name: "Quilombo dos Flores",
+      latLong: [-30.076562447153844, -51.20212258840468]
+    },
+    {
+      name: "Quilombo dos Lemos",
+      latLong: [-30.06898662052092, -51.23725849025099]
+    },
+    {
+      name: "Quilombo Familia do Ouro",
+      latLong: [-30.12536594225728, -51.10169730374337]
+    },
+    {
+      name: "Quilombo do Mocambo",
+      latLong: [-30.037208439934442, -51.22648104607669]
+    }
+  ]
 
   const navigate = useNavigate();
 
@@ -143,6 +189,12 @@ function Map() {
           />);
         })
       }
+
+        {territories.map((marker) => (
+          <Marker position={marker.latLong} icon={customMarkerIcon}>
+            <Popup>{marker.name}</Popup>
+          </Marker>
+        ))}
 
       {/* Adiciona o marcador na localização atual */}
       {currentLocation && (
