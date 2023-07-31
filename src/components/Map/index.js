@@ -13,35 +13,39 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
 import { useMap } from 'react-leaflet'
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
-
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import './style.css'
 
 function Map() {
 
   function RoutingMachine({ currentLocation, center }) {
     const map = useMap();
   
-    useEffect(() => {
-      if (currentLocation && center) {
-        const waypoints = [
-          L.latLng(currentLocation[0], currentLocation[1]),
-          L.latLng(center[0], center[1])
-        ];
-  
-        L.Routing.control({
-          waypoints,
-          routeWhileDragging: true,
-          router: new L.Routing.osrmv1({
-            serviceUrl: 'https://router.project-osrm.org/route/v1'
-          }),
-        }).addTo(map);
-      }
-    }, [map, currentLocation, center]);
-  
-    return null;
-  }
+  // mostra a rota de a localização atual até o quilombo
+  useEffect(() => {
+    if (currentLocation && center) {
+      const waypoints = [
+        L.latLng(currentLocation[0], currentLocation[1]),
+        L.latLng(center[0], center[1])
+      ];
+
+      L.Routing.control({
+        waypoints,
+        lineOptions: {
+          styles: [{ color: "#BC8F8F", weight: 4 }]
+        },
+        routeWhileDragging: true,
+        plan: L.Routing.plan(waypoints, {
+          show: true // Set show to false to hide the street view and directions
+        })
+      }).addTo(map);
+    }
+  }, [map, currentLocation, center]);
+
+  return null;
+}
 
   const customIcon = new Icon({
     iconUrl: require("./pin_fingerup.png"),
@@ -238,8 +242,6 @@ function Map() {
           center={center}
         />
       )}
-
-    
     </MapContainer>
   );
 }
