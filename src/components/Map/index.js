@@ -12,10 +12,37 @@ import { statesData } from './data';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
-
+import { useMap } from 'react-leaflet'
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import L from 'leaflet';
+import 'leaflet-routing-machine';
 
 
 function Map() {
+
+  function RoutingMachine({ currentLocation, center }) {
+    const map = useMap();
+  
+    useEffect(() => {
+      if (currentLocation && center) {
+        const waypoints = [
+          L.latLng(currentLocation[0], currentLocation[1]),
+          L.latLng(center[0], center[1])
+        ];
+  
+        L.Routing.control({
+          waypoints,
+          routeWhileDragging: true,
+          router: new L.Routing.osrmv1({
+            serviceUrl: 'https://router.project-osrm.org/route/v1'
+          }),
+        }).addTo(map);
+      }
+    }, [map, currentLocation, center]);
+  
+    return null;
+  }
+
   const customIcon = new Icon({
     iconUrl: require("./pin_fingerup.png"),
     iconSize: [38, 38] // size of the icon
@@ -92,7 +119,6 @@ function Map() {
     return deg * (Math.PI / 180);
   }
 
-  // Declare a função calculateDistanceBetweenCenterAndCurrentLocation
   const calculateDistanceBetweenCenterAndCurrentLocation = useCallback(() => {
     if (center && currentLocation) {
       const [latitudeCenter, longitudeCenter] = center;
@@ -108,7 +134,6 @@ function Map() {
     // eslint-disable-next-line
   }, [center, currentLocation]);
 
-  // useEffect para obter as coordenadas da geolocalização
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -124,17 +149,15 @@ function Map() {
     } else {
       console.error('Geolocalização não suportada pelo navegador.');
     }
-  }, []); // Não é necessário adicionar dependências aqui
+  }, []); 
 
-  // useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
   useEffect(() => {
-    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do segundo useEffect
     calculateDistanceBetweenCenterAndCurrentLocation();
   }, [currentLocation, center, calculateDistanceBetweenCenterAndCurrentLocation]);
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
-    navigate(`/territorio/${territoryId}`, { replace: true }); // Navega para a página de edição com o territoryId como parâmetro de rota
+    navigate(`/territorio/${territoryId}`, { replace: true });
   }
 
   return (
@@ -147,6 +170,8 @@ function Map() {
         url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=10GyEcePLHFPQHAXn11F"
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
       />
+
+
       {
         statesData.features.map((state) => {
           const coordinates = state.geometry.coordinates[0].map((item) => [item[1], item[0]]);
@@ -196,7 +221,6 @@ function Map() {
           </Marker>
         ))}
 
-      {/* Adiciona o marcador na localização atual */}
       {currentLocation && (
         <Marker position={currentLocation} icon={customIcon}>
           <Popup>
@@ -206,6 +230,16 @@ function Map() {
           </Popup>
         </Marker>
       )}
+
+      {/* Coloque o RoutingMachine dentro do MapContainer */}
+      {currentLocation && (
+        <RoutingMachine
+          currentLocation={currentLocation}
+          center={center}
+        />
+      )}
+
+    
     </MapContainer>
   );
 }
