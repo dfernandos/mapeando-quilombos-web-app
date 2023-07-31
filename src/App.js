@@ -1,8 +1,12 @@
-import RoutesApp from "./router";
-
+// App.js
+import React from 'react';
+import { AuthProvider } from './AuthContext';
+import RoutesApp from './router';
 function App() {
   return (
-    <RoutesApp />    
+    <AuthProvider>
+      <RoutesApp />
+    </AuthProvider>
   );
 }
 
