@@ -141,7 +141,7 @@ function Map() {
     <MapContainer
       center={center}
       zoom={13}
-      style={{ width: '100vw', height: '100vh' }}
+      style={{ width: '90vw', height: '70vh' }}
     >
       <TileLayer
         url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=10GyEcePLHFPQHAXn11F"
