@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -12,10 +12,13 @@ import { statesData } from './data';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
-
-
+import 'leaflet-routing-machine';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import './style.css'
+import RoutingMachine from './RoutingMachine';
 
 function Map() {
+
   const customIcon = new Icon({
     iconUrl: require("./pin_fingerup.png"),
     iconSize: [38, 38] // size of the icon
@@ -25,6 +28,9 @@ function Map() {
     iconUrl: require("./location-pin.png"),
     iconSize: [38, 38] // size of the icon
   });
+
+  const [selectedTerritory, setSelectedTerritory] = useState(null);
+
 
   const territories = [
     {
@@ -67,8 +73,6 @@ function Map() {
 
   const navigate = useNavigate();
 
-  const [distanceBetweenCenterAndCurrentLocation, setDistanceBetweenCenterAndCurrentLocation] = useState(null);
-
   // eslint-disable-next-line
   const [center, setCenter] = useState([-30.050890, -51.218222]);
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -92,23 +96,6 @@ function Map() {
     return deg * (Math.PI / 180);
   }
 
-  // Declare a função calculateDistanceBetweenCenterAndCurrentLocation
-  const calculateDistanceBetweenCenterAndCurrentLocation = useCallback(() => {
-    if (center && currentLocation) {
-      const [latitudeCenter, longitudeCenter] = center;
-      const [latitudeCurrent, longitudeCurrent] = currentLocation;
-
-      const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
-      console.log(`Distância entre center lat: ${latitudeCenter} long: ${longitudeCenter} e currentLocation: ${latitudeCurrent} : ${longitudeCurrent} ${distance} km`);
-      setDistanceBetweenCenterAndCurrentLocation(distance);
-    } else {
-      console.error('Localização atual não disponível.');
-      setDistanceBetweenCenterAndCurrentLocation(null);
-    }
-    // eslint-disable-next-line
-  }, [center, currentLocation]);
-
-  // useEffect para obter as coordenadas da geolocalização
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -124,18 +111,35 @@ function Map() {
     } else {
       console.error('Geolocalização não suportada pelo navegador.');
     }
-  }, []); // Não é necessário adicionar dependências aqui
+  }, []); 
 
-  // useEffect para calcular a distância quando as coordenadas da geolocalização ou o centro do mapa mudarem
-  useEffect(() => {
-    // Chame a função calculateDistanceBetweenCenterAndCurrentLocation aqui, dentro do segundo useEffect
-    calculateDistanceBetweenCenterAndCurrentLocation();
-  }, [currentLocation, center, calculateDistanceBetweenCenterAndCurrentLocation]);
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
-    navigate(`/territorio/${territoryId}`, { replace: true }); // Navega para a página de edição com o territoryId como parâmetro de rota
+    navigate(`/territorio/${territoryId}`, { replace: true });
   }
+
+  function handleTerritoryMarkerClick(territory) {
+    console.log('Marker clicked:', territory);
+    setSelectedTerritory(territory);
+  
+    if (currentLocation) {
+      const distance = calculateDistance(
+        currentLocation[0],
+        currentLocation[1],
+        territory.latLong[0],
+        territory.latLong[1]
+      );
+  
+      const distanceInKm = distance.toFixed(2); // Round the distance to 2 decimal places
+  
+      setSelectedTerritory((prevTerritory) => ({
+        ...prevTerritory,
+        distance: distanceInKm, // Add the distance to the selectedTerritory state
+      }));
+    }
+  }
+  
 
   return (
     <MapContainer
@@ -147,6 +151,8 @@ function Map() {
         url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=10GyEcePLHFPQHAXn11F"
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
       />
+
+
       {
         statesData.features.map((state) => {
           const coordinates = state.geometry.coordinates[0].map((item) => [item[1], item[0]]);
@@ -190,22 +196,43 @@ function Map() {
         })
       }
 
-        {territories.map((marker) => (
-          <Marker position={marker.latLong} icon={customMarkerIcon}>
-            <Popup>{marker.name}</Popup>
-          </Marker>
-        ))}
+    {
+      territories.map((marker) => (
+        <Marker
+          key={marker.name}
+          position={marker.latLong}
+          icon={customMarkerIcon}
+          eventHandlers={{
+            click: () => handleTerritoryMarkerClick(marker),
+          }}
+        >
+          <Popup>
+            <h2>{marker.name}</h2>
+            {selectedTerritory && selectedTerritory.name === marker.name && selectedTerritory.distance && (
+              <p>Distancia até localização atual: {selectedTerritory.distance} km <FontAwesomeIcon icon={faFaceSmile} /></p>
+            )}
+          </Popup>
+        </Marker>
+      ))
+      }
 
-      {/* Adiciona o marcador na localização atual */}
+
       {currentLocation && (
         <Marker position={currentLocation} icon={customIcon}>
           <Popup>
-            <p>Você está aqui</p>
-            <p>Distancia do centro é: {distanceBetweenCenterAndCurrentLocation} km <FontAwesomeIcon icon={faFaceSmile} /></p>
-            
+            <p>Você está aqui</p>            
           </Popup>
         </Marker>
       )}
+  {/* Rendering the RoutingMachine component */}
+  {selectedTerritory && currentLocation && (
+    <RoutingMachine
+      currentLocation={currentLocation}
+      selectedTerritory={selectedTerritory}
+      addWaypoints={false}
+    />
+  )}
+
     </MapContainer>
   );
 }
