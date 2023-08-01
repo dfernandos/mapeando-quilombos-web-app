@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/territory-svc",
+  baseURL: "https://territory-svc-production.up.railway.app/api/territory-svc",
 });
 
 export default api;

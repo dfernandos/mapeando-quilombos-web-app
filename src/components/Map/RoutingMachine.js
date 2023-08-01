@@ -9,7 +9,7 @@ function RoutingMachine({ currentLocation, selectedTerritory }) {
   const routeLineLayerRef = useRef(null);
 
   useEffect(() => {
-    if (!map) return; // Wait for the map to be ready
+    if (!map) return;
 
     if (!routingControlRef.current) {
       // Create the routing control only once
