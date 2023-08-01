@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -12,53 +12,12 @@ import { statesData } from './data';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
-import { useMap } from 'react-leaflet'
-import L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import './style.css'
+import RoutingMachine from './RoutingMachine';
 
 function Map() {
-
-  function RoutingMachine({ currentLocation, selectedTerritory }) {
-    const map = useMap();
-    const routingControlRef = useRef(null);
-  
-    useEffect(() => {
-      if (!map) return; // Wait for the map to be ready
-  
-      if (!routingControlRef.current) {
-        // Create the routing control only once
-        const newRoutingControl = L.Routing.control({
-          waypoints: [],
-          lineOptions: {
-            styles: [{ color: "#BC8F8F", weight: 4 }]
-          },
-          routeWhileDragging: true,
-          plan: L.Routing.plan([], {
-            show: true
-          })
-        });
-  
-        newRoutingControl.addTo(map);
-        routingControlRef.current = newRoutingControl;
-      }
-  
-      // Update the waypoints when currentLocation or selectedTerritory changes
-      if (currentLocation && selectedTerritory) {
-        const waypoints = [
-          L.latLng(currentLocation[0], currentLocation[1]),
-          L.latLng(selectedTerritory.latLong[0], selectedTerritory.latLong[1])
-        ];
-  
-        routingControlRef.current.setWaypoints(waypoints);
-      }
-    }, [map, currentLocation, selectedTerritory]);
-  
-    return null;
-  }
-  
-  
 
   const customIcon = new Icon({
     iconUrl: require("./pin_fingerup.png"),
@@ -114,8 +73,6 @@ function Map() {
 
   const navigate = useNavigate();
 
-  const [distanceBetweenCenterAndCurrentLocation, setDistanceBetweenCenterAndCurrentLocation] = useState(null);
-
   // eslint-disable-next-line
   const [center, setCenter] = useState([-30.050890, -51.218222]);
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -139,21 +96,6 @@ function Map() {
     return deg * (Math.PI / 180);
   }
 
-  const calculateDistanceBetweenCenterAndCurrentLocation = useCallback(() => {
-    if (center && currentLocation) {
-      const [latitudeCenter, longitudeCenter] = center;
-      const [latitudeCurrent, longitudeCurrent] = currentLocation;
-
-      const distance = calculateDistance(latitudeCenter, longitudeCenter, latitudeCurrent, longitudeCurrent);
-      console.log(`Distância entre center lat: ${latitudeCenter} long: ${longitudeCenter} e currentLocation: ${latitudeCurrent} : ${longitudeCurrent} ${distance} km`);
-      setDistanceBetweenCenterAndCurrentLocation(distance);
-    } else {
-      console.error('Localização atual não disponível.');
-      setDistanceBetweenCenterAndCurrentLocation(null);
-    }
-    // eslint-disable-next-line
-  }, [center, currentLocation]);
-
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -171,9 +113,6 @@ function Map() {
     }
   }, []); 
 
-  useEffect(() => {
-    calculateDistanceBetweenCenterAndCurrentLocation();
-  }, [currentLocation, center, calculateDistanceBetweenCenterAndCurrentLocation, selectedTerritory]);
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
@@ -183,7 +122,24 @@ function Map() {
   function handleTerritoryMarkerClick(territory) {
     console.log('Marker clicked:', territory);
     setSelectedTerritory(territory);
+  
+    if (currentLocation) {
+      const distance = calculateDistance(
+        currentLocation[0],
+        currentLocation[1],
+        territory.latLong[0],
+        territory.latLong[1]
+      );
+  
+      const distanceInKm = distance.toFixed(2); // Round the distance to 2 decimal places
+  
+      setSelectedTerritory((prevTerritory) => ({
+        ...prevTerritory,
+        distance: distanceInKm, // Add the distance to the selectedTerritory state
+      }));
+    }
   }
+  
 
   return (
     <MapContainer
@@ -240,38 +196,42 @@ function Map() {
         })
       }
 
-      {
-        territories.map((marker) => (
-        <Marker position={marker.latLong} icon={customMarkerIcon}
-         eventHandlers={{
-          click: () => {
-            console.log('marker clicked', marker)
-            handleTerritoryMarkerClick(marker)
-          },
-        }}
-         >
-          <Popup>{marker.name}</Popup>
+    {
+      territories.map((marker) => (
+        <Marker
+          key={marker.name}
+          position={marker.latLong}
+          icon={customMarkerIcon}
+          eventHandlers={{
+            click: () => handleTerritoryMarkerClick(marker),
+          }}
+        >
+          <Popup>
+            <h2>{marker.name}</h2>
+            {selectedTerritory && selectedTerritory.name === marker.name && selectedTerritory.distance && (
+              <p>Distancia até localização atual: {selectedTerritory.distance} km <FontAwesomeIcon icon={faFaceSmile} /></p>
+            )}
+          </Popup>
         </Marker>
-      ))}
+      ))
+      }
 
 
       {currentLocation && (
         <Marker position={currentLocation} icon={customIcon}>
           <Popup>
-            <p>Você está aqui</p>
-            <p>Distancia do centro é: {distanceBetweenCenterAndCurrentLocation} km <FontAwesomeIcon icon={faFaceSmile} /></p>
-            
+            <p>Você está aqui</p>            
           </Popup>
         </Marker>
       )}
-
-      {/* Check if both selectedTerritory and currentLocation are defined before rendering RoutingMachine */}
-      {selectedTerritory && currentLocation && (
-        <RoutingMachine
-          currentLocation={currentLocation}
-          selectedTerritory={selectedTerritory}
-        />
-      )}
+  {/* Rendering the RoutingMachine component */}
+  {selectedTerritory && currentLocation && (
+    <RoutingMachine
+      currentLocation={currentLocation}
+      selectedTerritory={selectedTerritory}
+      addWaypoints={false}
+    />
+  )}
 
     </MapContainer>
   );

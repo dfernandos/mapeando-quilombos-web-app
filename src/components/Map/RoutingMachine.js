@@ -1,27 +1,75 @@
-import React, { useEffect } from 'react';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
-import 'leaflet-routing-machine';
+import { useEffect, useRef } from "react";
+import L from "leaflet";
+import "leaflet-routing-machine";
+import { useMap } from "react-leaflet";
 
-function MapWithRouting() {
+function RoutingMachine({ currentLocation, selectedTerritory }) {
+  const map = useMap();
+  const routingControlRef = useRef(null);
+  const routeLineLayerRef = useRef(null);
+
   useEffect(() => {
-    // Cria o mapa Leaflet
-    const map = L.map('map').setView([51.505, -0.09], 13);
+    if (!map) return; // Wait for the map to be ready
 
-    // Adiciona o tile layer do mapa (por exemplo, OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    if (!routingControlRef.current) {
+      // Create the routing control only once
+      routingControlRef.current = L.Routing.control({
+        waypoints: [],
+        routeWhileDragging: true,
+        plan: L.Routing.plan([], {
+          show: true
+        })
+      });
 
-    // Adiciona o controle de roteamento (Routing Control)
-    L.Routing.control({
-      waypoints: [
-        L.latLng(51.5, -0.09),
-        L.latLng(51.51, -0.1),
-      ],
-    }).addTo(map);
-  }, []);
+      routingControlRef.current.addTo(map);
+    }
 
-  return <div id="map" style={{ height: '500px' }} />;
+    // Update the waypoints and remove the previous route when currentLocation or selectedTerritory changes
+    if (currentLocation && selectedTerritory) {
+      const waypoints = [
+        L.latLng(currentLocation[0], currentLocation[1]),
+        L.latLng(selectedTerritory.latLong[0], selectedTerritory.latLong[1])
+      ];
+
+      // Remove the previous route line layer from the map if it exists
+      if (routeLineLayerRef.current) {
+        map.removeLayer(routeLineLayerRef.current);
+      }
+
+      // Set the new waypoints and automatically display the new route
+      routingControlRef.current.setWaypoints(waypoints);
+
+      // Store the reference to the new route line layer
+      routeLineLayerRef.current = routingControlRef.current
+        .getPlan()
+        .getWaypoints()[0].latLng;
+    } else {
+      // If either currentLocation or selectedTerritory is null, remove the waypoints and the route from the map
+      routingControlRef.current.setWaypoints([]);
+      if (routeLineLayerRef.current) {
+        map.removeLayer(routeLineLayerRef.current);
+        routeLineLayerRef.current = null; // Reset the routeLineLayerRef
+      }
+    }
+  }, [map, currentLocation, selectedTerritory]);
+
+  // Remove the "?" icons after the route is created
+  useEffect(() => {
+    if (routingControlRef.current) {
+      const plan = routingControlRef.current.getPlan();
+      if (plan) {
+        plan.options.createMarker = function (i, waypoint, n) {
+          return null; // Return null to disable markers for waypoints
+        };
+        plan._waypoints.forEach((waypoint) => {
+          waypoint.marker = null; // Set the marker to null to remove any existing markers
+        });
+        plan._updateMarkers(); // Update the markers to apply the changes
+      }
+    }
+  }, [currentLocation, selectedTerritory]);
+
+  return null;
 }
 
-export default MapWithRouting;
+export default RoutingMachine;
