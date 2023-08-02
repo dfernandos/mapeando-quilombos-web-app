@@ -209,7 +209,7 @@ function Map() {
           <Popup>
             <h2>{marker.name}</h2>
             {selectedTerritory && selectedTerritory.name === marker.name && selectedTerritory.distance && (
-              <p>Distancia até localização atual: {selectedTerritory.distance} km <FontAwesomeIcon icon={faFaceSmile} /></p>
+              <p>A Distancia do {selectedTerritory.name} até a sua localização atual é de {selectedTerritory.distance} km <FontAwesomeIcon icon={faFaceSmile} /></p>
             )}
           </Popup>
         </Marker>
