@@ -18,9 +18,14 @@ function TerritorioDetalhes({ territory }) {
           <p>{territory.cartografia}</p>
           <h3>Religião:</h3>
           <p>{territory.religion}</p>
+          {
+          territory.extra_content && 
+          <div>
           <h3>Conteúdo Extra:</h3>
           <p>{territory.extra_content}</p>
-          <h3>Mapa:</h3>
+          </div>
+          }
+          <h3>Referencias</h3>
           <p>{territory.map}</p>
         </div>
       </div>

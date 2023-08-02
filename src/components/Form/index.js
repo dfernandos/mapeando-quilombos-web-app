@@ -137,7 +137,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
   
       const { name, briefDescription, history, cartografia, religion, extra_content, mainImage, map } = formData;
   
-      if (name && briefDescription && history && cartografia && religion && extra_content && mainImage && map) {
+      if (name && briefDescription && history && cartografia && religion && mainImage && map) {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('briefDescription', briefDescription);
@@ -248,7 +248,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         {formData.mainImage && !imagePreview && (
           <img src={`data:image/jpeg;base64, ${formData.mainImage}`} alt={formData.name} className="capa" />
         )}
-        <label>Imagem (Mapa):</label>
+        <label>Referencias:</label>
         <input
           type="text"
           value={formData.map}
