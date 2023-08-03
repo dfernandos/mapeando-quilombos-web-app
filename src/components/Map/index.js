@@ -19,6 +19,8 @@ import RoutingMachine from './RoutingMachine';
 
 function Map() {
 
+  
+
   const customIcon = new Icon({
     iconUrl: require("./pin_fingerup.png"),
     iconSize: [38, 38] // size of the icon
@@ -142,16 +144,21 @@ function Map() {
   
 
   return (
+    <div>
+    <h2 className="sr-only">Mapa de Porto Alegre com os bairros que possuem territórios quilombolas</h2>
     <MapContainer
       center={center}
       zoom={13}
       style={{ width: '90vw', height: '70vh' }}
+      aria-label="Mapa com os territórios"
     >
+     <span className="sr-only">Mapa de Porto Alegre com os bairros que possuem territórios quilombolas</span>
+
       <TileLayer
+        aria-hidden="true"
         url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=10GyEcePLHFPQHAXn11F"
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
       />
-
 
       {
         statesData.features.map((state) => {
@@ -196,31 +203,34 @@ function Map() {
         })
       }
 
-    {
-      territories.map((marker) => (
+      { territories.map((marker) => (
         <Marker
           key={marker.name}
           position={marker.latLong}
           icon={customMarkerIcon}
+          title={marker.name} // Adicionar o atributo title com o nome do território
+          role="button" // Adicionar atributo role para indicar que é clicável
           eventHandlers={{
             click: () => handleTerritoryMarkerClick(marker),
           }}
+          aria-hidden="true"
         >
           <Popup>
             <h2>{marker.name}</h2>
             {selectedTerritory && selectedTerritory.name === marker.name && selectedTerritory.distance && (
-              <p>A Distancia do {selectedTerritory.name} até a sua localização atual é de {selectedTerritory.distance} km <FontAwesomeIcon icon={faFaceSmile} /></p>
+              <p>
+                A Distância do {selectedTerritory.name} até a sua localização atual é de {selectedTerritory.distance} km{' '}
+                <FontAwesomeIcon icon={faFaceSmile} />
+              </p>
             )}
           </Popup>
         </Marker>
-      ))
-      }
-
+      ))}
 
       {currentLocation && (
-        <Marker position={currentLocation} icon={customIcon}>
+        <Marker position={currentLocation} icon={customIcon} title="Você está aqui"> {/* Adicionar o atributo title aqui também */}
           <Popup>
-            <p>Você está aqui</p>            
+            <p>Você está aqui</p>
           </Popup>
         </Marker>
       )}
@@ -234,6 +244,7 @@ function Map() {
   )}
 
     </MapContainer>
+    </div>
   );
 }
 

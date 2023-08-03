@@ -1,18 +1,17 @@
-import { Link } from 'react-router-dom'
-import './style.css'
+import { Link } from 'react-router-dom';
+import './style.css';
 
-function Header(){
-    return(
-        <header>
-            <div className="menu">
-                <Link to="/"> Home </Link>
-                <Link to="/GestaoConteudo"> Gestão de Conteúdo </Link>
-                <Link to="/sobre"> Sobre </Link>
-                <Link to="/contato"> Contato </Link>
-                
-            </div>
-        </header>
-    )
+function Header() {
+  return (
+    <header>
+      <div className="menu">
+        <Link to="/" tabIndex="1">Home</Link>
+        <Link to="/GestaoConteudo" tabIndex="2">Gestão de Conteúdo</Link>
+        <Link to="/sobre" tabIndex="3">Sobre</Link>
+        <Link to="/contato" tabIndex="4">Contato</Link>
+      </div>
+    </header>
+  );
 }
 
 export default Header;
