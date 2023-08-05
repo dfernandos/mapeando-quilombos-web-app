@@ -145,7 +145,6 @@ function Map() {
 
   return (
     <div>
-    <h2 className="sr-only">Mapa de Porto Alegre com os bairros que possuem territórios quilombolas</h2>
     <MapContainer
       center={center}
       zoom={13}
