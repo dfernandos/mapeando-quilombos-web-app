@@ -11,6 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 function Form({ territoryData, territoryId, onFormSubmit }) {
   const navigate = useNavigate();
 
+  // eslint-disable-next-line
   const [renderedMapHtml, setRenderedMapHtml] = useState('');
 
   const [isActionSuccess, setIsActionSuccess] = useState(false);
