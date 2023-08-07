@@ -118,7 +118,7 @@ function Map() {
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
-    navigate(`/territorio/${territoryId}`, { replace: true });
+    navigate(`/territorio/64d17b8a0e1745762c60eba6`, { replace: true });
   }
 
   function handleTerritoryMarkerClick(territory) {
