@@ -109,8 +109,7 @@ function GestaoConteudo() {
                 </div>
               </div>
               <img src={`data:image/jpeg;base64, ${item.mainImage}`} alt={item.name} className="capa" />
-              <p>{item.briefDescription}</p>
-              <Link to={`/territorio/${item.id}`} className="botao">Acessar</Link>
+              <div dangerouslySetInnerHTML={{ __html: item.briefDescription }}></div>              <Link to={`/territorio/${item.id}`} className="botao">Acessar</Link>
   
               {showAlert && territoryToDelete === item.id && (
                 <CustomAlert
