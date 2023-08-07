@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .App {
+    flex: 1;
+  }
+.sobre-detalhes {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .sobre-info {
+    width: 800px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .territorio-info h2 {
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  .sobre-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  
+  .territorio-text {
+    display: flex;
+    flex-direction: column;
+  }
+  

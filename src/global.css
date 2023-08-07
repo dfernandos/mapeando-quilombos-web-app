@@ -1,0 +1,25 @@
+/* Atualize o estilo do corpo da página */
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Estilo para englobar todo o conteúdo, exceto o footer */
+  .app-container {
+    flex: 1;
+  }
+  
+  /* Estilo para o footer */
+  footer {
+    background-color: #BC8F8F;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+  }
+  
