@@ -11,6 +11,8 @@ import 'react-quill/dist/quill.snow.css';
 function Form({ territoryData, territoryId, onFormSubmit }) {
   const navigate = useNavigate();
 
+  const [renderedMapHtml, setRenderedMapHtml] = useState('');
+
   const [isActionSuccess, setIsActionSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -32,15 +34,16 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
     }
   }, [isActionSuccess]);
 
+
   useEffect(() => {
     if (territoryId) {
-      // Fetch the data for the specific territory using the territoryId
       api
         .get(`/territory/${territoryId}`)
         .then((response) => {
           const territoryData = response.data;
           // Update the form data with the fetched territory data
-          setFormData({
+          setFormData((prevFormData) => ({
+            ...prevFormData,
             name: territoryData.name || '',
             briefDescription: territoryData.briefDescription || '',
             history: territoryData.history || '',
@@ -48,15 +51,20 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
             religion: territoryData.religion || '',
             extra_content: territoryData.extra_content || '',
             mainImage: territoryData.mainImage || null,
-            map: territoryData.map || '',
-            error: '',
-          });
+            map: territoryData.map || '', // Initialize map if it's empty
+          }));
         })
         .catch((error) => {
           console.error('Error fetching territory data:', error);
         });
     }
   }, [territoryId]);
+
+  useEffect(() => {
+    // Update the rendered HTML whenever the formData.map changes
+    setRenderedMapHtml(formData.map);
+  }, [formData.map]);
+  
 
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -134,7 +142,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
 
     const { name, briefDescription, history, cartografia, religion, extra_content, mainImage, map } = formData;
 
-    if (name && briefDescription && history && cartografia && religion && mainImage && map) {
+    if (name && briefDescription && history && cartografia && religion && mainImage && typeof map === 'string') {
       const formData = new FormData();
       formData.append('name', name);
       formData.append('briefDescription', briefDescription);
@@ -241,13 +249,24 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         {formData.mainImage && !imagePreview && (
           <img src={`data:image/jpeg;base64, ${formData.mainImage}`} alt={formData.name} className="capa" />
         )}
+
       <label>Referencias:</label>
-        <input
-          type="text"
+        <ReactQuill
+          className="react-quill"
+          theme='snow'
           value={formData.map}
-          onChange={(event) => setFormData({ ...formData, map: event.target.value })}
-        />
-        <button type='submit'>Salvar</button>
+          onChange={(value) => setFormData({ ...formData, map: value })}
+        />    
+
+  <div dangerouslySetInnerHTML={{ __html: formData.map }}></div>
+
+        <button
+        type='submit'
+        onClick={handleSave}
+      >
+        Salvar
+      </button>
+
       </form>
     </div>
   );
