@@ -259,8 +259,6 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           onChange={(value) => setFormData({ ...formData, map: value })}
         />    
 
-  <div dangerouslySetInnerHTML={{ __html: formData.map }}></div>
-
         <button
         type='submit'
         onClick={handleSave}
