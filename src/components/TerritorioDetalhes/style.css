@@ -1,27 +1,22 @@
+/* style.css */
+
 .territorio-detalhes {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Center the content horizontally */
-  gap: 20px;
+  justify-content: center;
 }
 
 .territorio-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
   max-width: 800px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-  margin: 8px;
+  margin: 20px;
   padding: 20px;
-  background: #f7eaea;
 }
 
-.territorio-detalhes h2 {
-  margin-top: 0;
+.territorio-info h2 {
   text-align: center;
+  font-size: 24px;
 }
 
 .territorio-header {
@@ -34,20 +29,15 @@
   max-height: 400px;
   object-fit: cover;
   border-radius: 4px;
-  margin-bottom: 20px; /* Adicionar espaçamento na parte inferior da imagem */
-}
-
-.territorio-info {
-  display: flex;
-  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .territorio-text {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .territorio-text h3 {
-  margin: 0;
   margin-top: 10px;
   font-size: 18px;
 }
@@ -57,4 +47,20 @@
   text-align: justify;
 }
 
+.territorio-text h3:hover {
+  cursor: pointer;
+  color: #007bff; /* Cor do link quando passa o mouse */
+}
 
+.territorio-text .extra-content {
+  display: none;
+  margin-top: 20px;
+}
+
+.territorio-text .extra-content p {
+  margin-top: 5px;
+}
+
+.territorio-text .extra-content.active {
+  display: block;
+}
