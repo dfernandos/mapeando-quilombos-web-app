@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
   }
   
   .App {
@@ -13,6 +12,7 @@ body {
 
   
 footer {
+    border-top: rgb(148, 143, 143) 3px solid;
     background-color: #BC8F8F;
     color: #fff;
     font-family: 'Arial', sans-serif;
@@ -20,14 +20,13 @@ footer {
     padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
   }
   
   .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -49,4 +48,5 @@ footer {
       margin-left: 10px;
     }
   }
+  
   
