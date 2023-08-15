@@ -12,7 +12,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
   const navigate = useNavigate();
 
   // eslint-disable-next-line
-  const [renderedMapHtml, setRenderedMapHtml] = useState('');
+  const [renderedReferenceHtml, setRenderedReferenceHtml] = useState('');
 
   const [isActionSuccess, setIsActionSuccess] = useState(false);
 
@@ -24,7 +24,9 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
     religion: '',
     extra_content: '',
     mainImage: null,
-    map: '',
+    latitude: 0,
+    longitude: 0,
+    reference: '',
     error: '',
   });
 
@@ -52,7 +54,9 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
             religion: territoryData.religion || '',
             extra_content: territoryData.extra_content || '',
             mainImage: territoryData.mainImage || null,
-            map: territoryData.map || '', // Initialize map if it's empty
+            latitude: Number(territoryData.latitude) || 0,
+            longitude: Number(territoryData.longitude) || 0,
+            reference: territoryData.reference || '',
           }));
         })
         .catch((error) => {
@@ -62,9 +66,9 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
   }, [territoryId]);
 
   useEffect(() => {
-    // Update the rendered HTML whenever the formData.map changes
-    setRenderedMapHtml(formData.map);
-  }, [formData.map]);
+    // Update the rendered HTML whenever the formData.reference changes
+    setRenderedReferenceHtml(formData.reference);
+  }, [formData.reference]);
   
 
   const [imagePreview, setImagePreview] = useState(null);
@@ -141,9 +145,11 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
     event.preventDefault();
     setImagePreview(null);
 
-    const { name, briefDescription, history, cartografia, religion, extra_content, mainImage, map } = formData;
+    const { name, briefDescription, history, cartografia, religion, extra_content, mainImage, reference } = formData;
+    const latitude = Number(formData.latitude);
+    const longitude = Number(formData.longitude);
 
-    if (name && briefDescription && history && cartografia && religion && mainImage && typeof map === 'string') {
+    if (name && briefDescription && history && cartografia && religion && mainImage && typeof reference === 'string') {
       const formData = new FormData();
       formData.append('name', name);
       formData.append('briefDescription', briefDescription);
@@ -151,8 +157,10 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
       formData.append('cartografia', cartografia);
       formData.append('religion', religion);
       formData.append('extra_content', extra_content);
+      formData.append('latitude', latitude);
+      formData.append('longitude', longitude);
       formData.append('file', mainImage);
-      formData.append('map', map);
+      formData.append('reference', reference);
 
       try {
         if (territoryId) {
@@ -183,7 +191,9 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           religion: "",
           extra_content: "",
           mainImage: null,
-          map: "",
+          latitude: 0,
+          longitude: 0,
+          reference: "",
           error: ""
         });
       } catch (error) {
@@ -238,6 +248,13 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           onChange={(value) => setFormData({ ...formData, extra_content: value })
         }
         />
+
+        <label> Latitude:</label>
+        <input type='text' value={formData.latitude} onChange={(event) => setFormData({ ...formData, latitude: event.target.value })} />
+
+        <label> longitude:</label>
+        <input type='text' value={formData.longitude} onChange={(event) => setFormData({ ...formData, longitude: event.target.value })} />
+
         <label>Imagem (capa):</label>
         <input
           type="file"
@@ -255,8 +272,8 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         <ReactQuill
           className="react-quill"
           theme='snow'
-          value={formData.map}
-          onChange={(value) => setFormData({ ...formData, map: value })}
+          value={formData.reference}
+          onChange={(value) => setFormData({ ...formData, reference: value })}
         />    
 
         <button
