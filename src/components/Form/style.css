@@ -13,6 +13,7 @@
   border-radius: 10px; /* Adicione bordas arredondadas para o formulário */
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Adicione sombra para destacar o formulário */
   margin: 0 auto; /* Centralize o formulário horizontalmente */
+  margin-bottom: 30px;
 }
 
 .form-container h2 {
