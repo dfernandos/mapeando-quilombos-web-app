@@ -37,7 +37,7 @@ function TerritorioDetalhes({ territory }) {
           <h3>Religião</h3>
           <div dangerouslySetInnerHTML={{ __html: territory.religion }}></div>
           <h3>Referências</h3>
-          <div dangerouslySetInnerHTML={{ __html: territory.map }}></div>
+          <div dangerouslySetInnerHTML={{ __html: territory.reference }}></div>
         </div>
       </div>
     </div>

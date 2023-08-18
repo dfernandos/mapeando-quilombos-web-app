@@ -16,10 +16,30 @@ import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import './style.css'
 import RoutingMachine from './RoutingMachine';
+import api from '../../Api';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Map() {
 
   
+  const [territoriesCoordinates, setTerritoriesCoordinates] = useState([]);
+
+  useEffect(() => {
+    async function loadApi() {
+
+      try {
+        const response = await api.get('/territory/all'); 
+        console.log(response.data);
+        setTerritoriesCoordinates(response.data);
+      } catch (error) {
+        console.error("Erro ao carregar os territórios:", error);
+        toast.error('Ocorreu um erro ao carregar os territórios. Por favor, tente novamente mais tarde.');
+      }
+    }
+
+    loadApi();
+  }, []);
 
   const customIcon = new Icon({
     iconUrl: require("./pin_fingerup.png"),
@@ -33,45 +53,6 @@ function Map() {
 
   const [selectedTerritory, setSelectedTerritory] = useState(null);
 
-
-  const territories = [
-    {
-      name: "Quilombo da Família Silva",
-      latLong: [-30.027164778731652, -51.17204963621945]
-    },
-    {
-      name: "Quilombo dos Alpes",
-      latLong: [-30.092640557901113, -51.193365781330975]
-    },
-    {
-      name: "Quilombo do Areal",
-      latLong: [-30.045023132925397, -51.22538049770927]
-    },
-    {
-      name: "Quilombo dos Fidélix",
-      latLong: [-30.045046843301243, -51.216324117240966]
-    },
-    {
-      name: "Quilombo dos Machado",
-      latLong: [-29.994368335578976, -51.13932757491351]
-    },
-    {
-      name: "Quilombo dos Flores",
-      latLong: [-30.076562447153844, -51.20212258840468]
-    },
-    {
-      name: "Quilombo dos Lemos",
-      latLong: [-30.06898662052092, -51.23725849025099]
-    },
-    {
-      name: "Quilombo Familia do Ouro",
-      latLong: [-30.12536594225728, -51.10169730374337]
-    },
-    {
-      name: "Quilombo do Mocambo",
-      latLong: [-30.037208439934442, -51.22648104607669]
-    }
-  ]
 
   const navigate = useNavigate();
 
@@ -152,6 +133,7 @@ function Map() {
       aria-label="Mapa com os territórios"
     >
      <span className="sr-only">Mapa de Porto Alegre com os bairros que possuem territórios quilombolas</span>
+     <ToastContainer />
 
       <TileLayer
         aria-hidden="true"
@@ -202,10 +184,10 @@ function Map() {
         })
       }
 
-      { territories.map((marker) => (
+      { territoriesCoordinates.map((marker) => (
         <Marker
           key={marker.name}
-          position={marker.latLong}
+          position={[marker.latitude, marker.longitude]}
           icon={customMarkerIcon}
           title={marker.name} // Adicionar o atributo title com o nome do território
           role="button" // Adicionar atributo role para indicar que é clicável
