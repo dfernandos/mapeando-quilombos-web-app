@@ -11,6 +11,9 @@ import GestaoConteudo from './pages/GestaoConteudo';
 import EditarTerritory from './pages/Editar';
 import Footer from './components/Footer';
 import './global.css';
+import Login from './pages/Login/Login';
+import PrivateRoute from './privateRoute';
+import Signup from './pages/Signup';
 
 function RoutesApp() {
   return (
@@ -22,10 +25,13 @@ function RoutesApp() {
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contato" element={<Contato />} />
           <Route path="/*" element={<Erro />} />
-          <Route path="/cadastro" element={<Cadastrar />} />
-          <Route path="/editar" element={<EditarTerritory />} />
+          <Route path="/cadastro" element={<PrivateRoute><Cadastrar /> </PrivateRoute>} />
+          <Route path="/editar" element={<PrivateRoute><EditarTerritory /></PrivateRoute>} />
           <Route path="/territorio/:id" element={<Territorio />} />
-          <Route path="/GestaoConteudo" element={<GestaoConteudo />} />
+          <Route path="/GestaoConteudo" element={<PrivateRoute><GestaoConteudo /> </PrivateRoute>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
         </Routes>
       </div>
       <Footer />
