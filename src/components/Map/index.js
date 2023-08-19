@@ -107,19 +107,24 @@ function Map() {
     setSelectedTerritory(territory);
   
     if (currentLocation) {
+      console.log(territory.latitude)
+      console.log(territory.longitude)
       const distance = calculateDistance(
         currentLocation[0],
         currentLocation[1],
-        territory.latLong[0],
-        territory.latLong[1]
+        territory.latitude,
+        territory.longitude
       );
   
+      console.log("chegou aqui")
       const distanceInKm = distance.toFixed(2); // Round the distance to 2 decimal places
-  
+      console.log("chegou aqui 2")
       setSelectedTerritory((prevTerritory) => ({
         ...prevTerritory,
         distance: distanceInKm, // Add the distance to the selectedTerritory state
-      }));
+      })
+      );
+      console.log("chegou aqui 3")
     }
   }
   
@@ -189,8 +194,8 @@ function Map() {
           key={marker.name}
           position={[marker.latitude, marker.longitude]}
           icon={customMarkerIcon}
-          title={marker.name} // Adicionar o atributo title com o nome do território
-          role="button" // Adicionar atributo role para indicar que é clicável
+          title={marker.name} 
+          role="button" 
           eventHandlers={{
             click: () => handleTerritoryMarkerClick(marker),
           }}

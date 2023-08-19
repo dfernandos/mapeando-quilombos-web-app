@@ -28,7 +28,7 @@ function RoutingMachine({ currentLocation, selectedTerritory }) {
     if (currentLocation && selectedTerritory) {
       const waypoints = [
         L.latLng(currentLocation[0], currentLocation[1]),
-        L.latLng(selectedTerritory.latLong[0], selectedTerritory.latLong[1])
+        L.latLng(selectedTerritory.latitude, selectedTerritory.longitude)
       ];
 
       // Remove the previous route line layer from the map if it exists
