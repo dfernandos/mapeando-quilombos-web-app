@@ -30,7 +30,7 @@ function RoutesApp() {
           <Route path="/territorio/:id" element={<Territorio />} />
           <Route path="/GestaoConteudo" element={<PrivateRoute><GestaoConteudo /> </PrivateRoute>} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<PrivateRoute><Signup /></PrivateRoute>} />
 
         </Routes>
       </div>

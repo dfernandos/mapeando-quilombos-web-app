@@ -5,6 +5,10 @@
     align-items: center;
     min-height: 50vh;
   }
+
+  h2{
+    align-items: center;
+  }
   
   .signup-card {
     width: 400px;

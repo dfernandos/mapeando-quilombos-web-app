@@ -40,7 +40,7 @@ function Signup() {
   return (
     <div className="signup-container">
       <div className="signup-card">
-        <h2>Sign Up</h2>
+        <h2>Cadastro de usuário</h2>
         <form className="signup-form" onSubmit={handleSignup}>
           <input
             type="email"
@@ -63,7 +63,7 @@ function Signup() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="input-field"
           />
-          <button type="submit" className="signup-button">Sign Up</button>
+          <button type="submit" className="signup-button">Cadastrar</button>
         </form>
       </div>
     </div>

@@ -209,15 +209,15 @@ function Map() {
               </p>  
             )}
             <p> Para mais informações
-              <br />  
             <span
                 onClick={() => getTerritory(marker.id)}
                 role="link"
-                tabIndex={0} // Isso torna o elemento focável para eventos de teclado
+                tabIndex={0} 
                 style={{
-                  color: 'blue', // Defina a cor que lembre um link
-                  textDecoration: 'underline', // Adicione sublinhado para dar a aparência de link
-                  cursor: 'pointer', // Mude o cursor quando estiverem sobre o texto
+                  color: 'blue',
+                  textDecoration: 'underline', 
+                  cursor: 'pointer',
+                  marginLeft: 2,
                 }}
               >
               clique aqui
