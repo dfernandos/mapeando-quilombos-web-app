@@ -99,7 +99,7 @@ function Map() {
 
   function getTerritory(territoryId) {
     console.log(`Ícone clicado para o território com ID: ${territoryId}`);
-    navigate(`/territorio/64d17b8a0e1745762c60eba6`, { replace: true });
+    navigate(`/territorio/${territoryId}`, { replace: true });
   }
 
   function handleTerritoryMarkerClick(territory) {
@@ -183,7 +183,6 @@ function Map() {
                   fillColor: '#a06b6b'
                 });
               },
-              click: () => getTerritory(state.id), // Chama getTerritory apenas no clique do polígono
             }}
           />);
         })
@@ -207,8 +206,23 @@ function Map() {
               <p>
                 A Distância do {selectedTerritory.name} até a sua localização atual é de {selectedTerritory.distance} km{' '}
                 <FontAwesomeIcon icon={faFaceSmile} />
-              </p>
+              </p>  
             )}
+            <p> Para mais informações
+              <br />  
+            <span
+                onClick={() => getTerritory(marker.id)}
+                role="link"
+                tabIndex={0} // Isso torna o elemento focável para eventos de teclado
+                style={{
+                  color: 'blue', // Defina a cor que lembre um link
+                  textDecoration: 'underline', // Adicione sublinhado para dar a aparência de link
+                  cursor: 'pointer', // Mude o cursor quando estiverem sobre o texto
+                }}
+              >
+              clique aqui
+            </span>              
+              </p>
           </Popup>
         </Marker>
       ))}
