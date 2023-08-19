@@ -5,3 +5,7 @@
   .leaflet-routing-container {
     display: none !important;
   }
+
+  .mapa{
+    margin-bottom: 10px;
+  }

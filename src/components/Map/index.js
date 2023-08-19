@@ -130,11 +130,11 @@ function Map() {
   
 
   return (
-    <div>
+    <div className='mapa'>
     <MapContainer
       center={center}
       zoom={13}
-      style={{ width: '90vw', height: '70vh' }}
+      style={{ width: '70vw', height: '70vh' }}
       aria-label="Mapa com os territórios"
     >
      <span className="sr-only">Mapa de Porto Alegre com os bairros que possuem territórios quilombolas</span>
