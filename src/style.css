@@ -6,17 +6,6 @@
     align-items: center;
 }
 
-header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    height: 60px;
-    width: 100%;
-    background-color: #4c89ec;
-    columns: #fff;
-}
-
 body{
     margin: 0;
     padding: 0;
@@ -43,23 +32,4 @@ body{
 .descricao{
     margin: 5px;
 
-}
-
-.botao{
-    height: 40px;
-    background: none;
-    border-radius: 5px;
-    color: #4c89ec;
-    border: 2px solid #4c89ec;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    transition: all 0.5s;
-}
-
-.botao:hover{
-    background-color: #4c89ec;
-    color: #FFF;
 }
