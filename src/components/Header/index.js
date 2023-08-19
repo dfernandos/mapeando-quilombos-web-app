@@ -22,8 +22,12 @@ function Header() {
         {user && (
           <Link to="/GestaoConteudo" tabIndex="2">Gestão de Conteúdo</Link>
         )}
-        <Link to="/sobre" tabIndex="3">Sobre</Link>
-        <Link to="/contato" tabIndex="4">Contato</Link>
+        {!user && (
+          <>
+            <Link to="/sobre" tabIndex="3">Sobre</Link>
+            <Link to="/contato" tabIndex="4">Contato</Link>
+          </>
+        )}
         {user && (
           <Link to="/signup" tabIndex="5">Cadastrar usuário</Link>
         )}
