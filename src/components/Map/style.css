@@ -9,3 +9,18 @@
   .mapa{
     margin-bottom: 10px;
   }
+
+  .message {
+    font-family: Arial, sans-serif;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+  }
+  

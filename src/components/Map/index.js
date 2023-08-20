@@ -25,6 +25,8 @@ function Map() {
   
   const [territoriesCoordinates, setTerritoriesCoordinates] = useState([]);
 
+  const [territoryQuantity, setTerritoryQuantity] = useState(0);
+
   useEffect(() => {
     async function loadApi() {
 
@@ -32,6 +34,8 @@ function Map() {
         const response = await api.get('/territory/all'); 
         console.log(response.data);
         setTerritoriesCoordinates(response.data);
+        setTerritoryQuantity(response.data.length);
+
       } catch (error) {
         console.error("Erro ao carregar os territórios:", error);
         toast.error('Ocorreu um erro ao carregar os territórios. Por favor, tente novamente mais tarde.');
@@ -116,21 +120,21 @@ function Map() {
         territory.longitude
       );
   
-      console.log("chegou aqui")
       const distanceInKm = distance.toFixed(2); // Round the distance to 2 decimal places
-      console.log("chegou aqui 2")
       setSelectedTerritory((prevTerritory) => ({
         ...prevTerritory,
         distance: distanceInKm, // Add the distance to the selectedTerritory state
       })
       );
-      console.log("chegou aqui 3")
     }
   }
   
 
   return (
     <div className='mapa'>
+
+  <span className="message">Existem {territoryQuantity} quilombolos em Porto Alegre</span>
+
     <MapContainer
       center={center}
       zoom={13}

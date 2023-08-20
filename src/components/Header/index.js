@@ -18,23 +18,23 @@ function Header() {
   return (
     <header>
       <div className="menu">
-        <Link to="/" tabIndex="1">Home</Link>
+        <Link to="/" tabIndex="1">Home |</Link>
         {user && (
-          <Link to="/GestaoConteudo" tabIndex="2">Gestão de Conteúdo</Link>
+          <Link to="/GestaoConteudo" tabIndex="2">Gestão de Conteúdo |</Link>
         )}
         {!user && (
           <>
-            <Link to="/sobre" tabIndex="3">Sobre</Link>
-            <Link to="/contato" tabIndex="4">Contato</Link>
+            <Link to="/sobre" tabIndex="3">Sobre |</Link>
+            <Link to="/contato" tabIndex="4">Contato |</Link>
           </>
         )}
         {user && (
-          <Link to="/signup" tabIndex="5">Cadastrar usuário</Link>
+          <Link to="/signup" tabIndex="5">Cadastrar usuário |</Link>
         )}
         {user ? (
-          <a href="/" onClick={handleLogout} tabIndex="6">Sair</a> 
+          <a href="/" onClick={handleLogout} tabIndex="6">Sair </a> 
         ) : (
-          <Link to="/login" tabIndex="6">Login</Link>
+          <Link to="/login" tabIndex="6">Login </Link>
         )}
       </div>
     </header>
