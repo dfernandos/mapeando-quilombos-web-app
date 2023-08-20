@@ -8,9 +8,17 @@ function Login() {
   const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null); // State para mensagens de erro
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Validação dos campos
+    if (!email || !password) {
+      setError('* Preencha todos os campos.');
+      return;
+    }
+
     try {
       await auth.signInWithEmailAndPassword(email, password);
       console.log('Logged in successfully');
@@ -23,6 +31,7 @@ function Login() {
       }
     } catch (error) {
       console.error('Login error:', error.message);
+      setError('Credenciais inválidas. Verifique seu email e senha.');
     }
   };
 
@@ -30,6 +39,7 @@ function Login() {
     <div className="login-container">
       <div className="login-card">
         <h2>Login</h2>
+        {error && <p className="error-message">{error}</p>} {/* Mostra mensagem de erro */}
         <form onSubmit={handleLogin} className="login-form">
           <input
             type="email"

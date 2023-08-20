@@ -44,3 +44,9 @@
     background-color: #bc8f8f;
   }
   
+  .error-message{
+    margin-top: 5px;
+    color: red;
+    font-size: 14px; /* Tamanho da fonte para a mensagem de erro */
+    margin-bottom: 10px; /* Adicione espaçamento abaixo da mensagem de erro */
+  }

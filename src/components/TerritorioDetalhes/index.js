@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
+import ReactHtmlParser from 'react-html-parser'; 
+
 
 function TerritorioDetalhes({ territory }) {
   const [showExtraContent, setShowExtraContent] = useState(false);
@@ -37,8 +39,10 @@ function TerritorioDetalhes({ territory }) {
           <h3>Religião</h3>
           <div dangerouslySetInnerHTML={{ __html: territory.religion }}></div>
           <h3>Referências</h3>
-          <div dangerouslySetInnerHTML={{ __html: territory.reference }}></div>
-        </div>
+          <div>
+            {ReactHtmlParser(territory.reference)} {/* Processa os links */}
+          </div>        
+          </div>
       </div>
     </div>
   );
