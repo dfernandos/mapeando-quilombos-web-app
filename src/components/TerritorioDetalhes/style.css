@@ -60,11 +60,6 @@
   text-align: justify;
 }
 
-.territorio-text h3:hover {
-  cursor: pointer;
-  color: #007bff; /* Cor do link quando passa o mouse */
-}
-
 .territorio-text .extra-content {
   display: none;
   margin-top: 20px;
