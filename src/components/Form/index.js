@@ -216,46 +216,71 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         </p>
       )}
       <form onSubmit={handleSave} encType='multipart/form-data'>
-        <label> Nome:</label>
-        <input type='text' value={formData.name} onChange={(event) => setFormData({ ...formData, name: event.target.value })} />
-        <label>Breve Descrição:</label>
+      <label htmlFor="nome">Nome:</label>
+        <input
+        placeholder='Digite aqui o nome do território quilombola'
+          type='text'
+          id="name"
+          value={formData.name}
+          onChange={(event) => setFormData({ ...formData, name: event.target.value })}
+        />
+        <label htmlFor="briefDescription">Breve Descrição:</label>
         <ReactQuill
           theme='snow'
           value={formData.briefDescription}
           onChange={(value) => setFormData({ ...formData, briefDescription: value })}
           className="react-quill"
+          aria-describedby="briefDescriptionHint"
+          placeholder='Digite aqui a descrição'
+          tabIndex="0"
         />
-        <label>História:</label>
+        <label htmlFor="História">História:</label>
         <ReactQuill 
         theme='snow'
          value={formData.history}
          onChange={(value) => setFormData({ ...formData, history: value })}
-         className="react-quill"/>
-        <label>Cartografia:</label>
+         className="react-quill"
+         aria-describedby="historyHint"
+        placeholder='Digite aqui a história do território quilombola'
+        tabIndex="0"/>
+
+        <label htmlFor="Cartografia">Cartografia:</label>
         <ReactQuill
           theme='snow'
           value={formData.cartografia}
           onChange={(value) => setFormData({ ...formData, cartografia: value })}
           className="react-quill"
-        />
-        <label>Religião:</label>
-        <ReactQuill theme='snow' value={formData.religion} onChange={(value) => setFormData({ ...formData, religion: value })} className="react-quill"/>
-        <label>Conteúdo Extra:</label>
+          aria-describedby="historyHint"
+        placeholder='Digite aqui a cartografia território quilombola'/>
+
+        <label htmlFor="Cartografia">Religião:</label>
+        <ReactQuill 
+        theme='snow' 
+        value={formData.religion} 
+        onChange={(value) => setFormData({ ...formData, religion: value })} 
+        className="react-quill"
+        aria-describedby="ReligiaoHint"
+        placeholder='Digite aqui sobre a religião do território quilombola'/>
+
+        <label htmlFor="Conteúdo Extra">Conteúdo Extra:</label>
         <ReactQuill
         className="react-quill"
           theme='snow'
           value={formData.extra_content}
           onChange={(value) => setFormData({ ...formData, extra_content: value })
         }
-        />
+        aria-describedby="conteúdoExtrahint"
+        placeholder='Digite aqui sobre a religião do território quilombola'/>
 
-        <label> Latitude:</label>
-        <input type='text' value={formData.latitude} onChange={(event) => setFormData({ ...formData, latitude: event.target.value })} />
+        <label tmlFor="Latitude"> Latitude:</label>
+        <input type='text' value={formData.latitude} onChange={(event) => setFormData({ ...formData, latitude: event.target.value })} aria-describedby="latitudeHint"
+        placeholder='Insira aqui a latitude'/>
 
-        <label> longitude:</label>
-        <input type='text' value={formData.longitude} onChange={(event) => setFormData({ ...formData, longitude: event.target.value })} />
+        <label tmlFor="Longitude"> longitude:</label>
+        <input type='text' value={formData.longitude} onChange={(event) => setFormData({ ...formData, longitude: event.target.value })} aria-describedby="longitudeHint"
+        placeholder='Insira aqui a longitude'/>
 
-        <label>Imagem (capa):</label>
+        <label tmlFor="Imagem">Imagem (capa):</label>
         <input
           type="file"
           name="file"
@@ -268,13 +293,14 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           <img src={`data:image/jpeg;base64, ${formData.mainImage}`} alt={formData.name} className="capa" />
         )}
 
-      <label>Referencias:</label>
+      <label htmlFor="reference">Referencias:</label>
         <ReactQuill
           className="react-quill"
           theme='snow'
           value={formData.reference}
           onChange={(value) => setFormData({ ...formData, reference: value })}
-        />    
+          aria-describedby="referenciaHint"
+          placeholder='Insira aqui as referencias'/>    
 
         <button
         type='submit'

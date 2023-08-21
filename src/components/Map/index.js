@@ -133,19 +133,18 @@ function Map() {
   return (
     <div className='mapa'>
 
-  <span className="message">Existem {territoryQuantity} quilombolos em Porto Alegre</span>
+  <span className="message" tabIndex="0">Existem {territoryQuantity} quilombos em Porto Alegre</span>
 
     <MapContainer
       center={center}
       zoom={13}
       style={{ width: '70vw', height: '70vh' }}
       aria-label="Mapa com os territórios"
-    >
-     <span className="sr-only">Mapa de Porto Alegre com os bairros que possuem territórios quilombolas</span>
-     <ToastContainer />
+    >     
+    <ToastContainer />
 
       <TileLayer
-        aria-hidden="true"
+        alt='Mapa feito com leaflet, maptiler e OpenStreetMap'
         url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=10GyEcePLHFPQHAXn11F"
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
       />
@@ -202,7 +201,7 @@ function Map() {
           eventHandlers={{
             click: () => handleTerritoryMarkerClick(marker),
           }}
-          aria-hidden="true"
+          alt={marker.name}
         >
           <Popup>
             <h2>{marker.name}</h2>

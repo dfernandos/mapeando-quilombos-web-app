@@ -19,7 +19,7 @@ function EditarTerritory() {
 
   return (
     <div className='container'>
-      <h1>Editar Território</h1>
+      <h1 tabIndex="0">Editar Território</h1>
       <Breadcrumb items={breadcrumbItems} />
 
       <Form territoryId={territoryId} />

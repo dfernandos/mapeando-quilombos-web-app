@@ -24,17 +24,17 @@ function Header() {
         )}
         {!user && (
           <>
-            <Link to="/sobre" tabIndex="3">Sobre |</Link>
-            <Link to="/contato" tabIndex="4">Contato |</Link>
+            <Link to="/sobre" tabIndex="2">Sobre |</Link>
+            <Link to="/contato" tabIndex="3">Contato |</Link>
           </>
         )}
         {user && (
-          <Link to="/signup" tabIndex="5">Cadastrar usuário |</Link>
+          <Link to="/signup" tabIndex="3">Cadastrar usuário |</Link>
         )}
         {user ? (
-          <a href="/" onClick={handleLogout} tabIndex="6">Sair </a> 
+          <a href="/" onClick={handleLogout} tabIndex="4">Sair </a> 
         ) : (
-          <Link to="/login" tabIndex="6">Login </Link>
+          <Link to="/login" tabIndex="4">Login </Link>
         )}
       </div>
     </header>

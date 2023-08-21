@@ -17,7 +17,7 @@ function Cadastrar() {
   return (
     <div className='container'>
       <Breadcrumb items={breadcrumbItems} />
-      <h1>Cadastrar Território</h1>
+      <h1 tabIndex="0">Cadastrar Território</h1>
       <Form territoryId={territoryId} />
     </div>
   );

@@ -9,7 +9,7 @@ const Breadcrumb = ({ items }) => {
         {items.map((item, index) => (
           <span key={index} className={`breadcrumb-item${index === items.length - 1 ? ' active' : ''}`}>
             {index === items.length - 1 ? (
-              <span>{item.label} </span>
+              <span tabIndex="0">{item.label} </span>
             ) : (
               <Link to={item.link}>{item.label}</Link>
             )}

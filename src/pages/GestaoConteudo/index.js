@@ -82,13 +82,13 @@ function GestaoConteudo() {
   return (
     <div className='container'>
       <Breadcrumb items={breadcrumbItems} />
-      <ToastContainer />
-  
+      <ToastContainer tabIndex="0"/>
+
       <div className='header'>
-        <h1>Lista de Territórios Quilombolas</h1>
+        <h1 tabIndex="0">Lista de Territórios Quilombolas</h1>
         <Link to="/cadastro" className="botao">+ Adicionar</Link>
       </div>
-  
+
       {isLoading ? (
         <div className="loading-container">
           <Loading type="spin" color="#a06b6b" />
@@ -98,24 +98,26 @@ function GestaoConteudo() {
           {territories.map((item) => (
             <article key={item.id} className='content'>
               <div className="headerItem">
-                <strong className="nome">{item.name}</strong>
+                <strong className="nome" tabIndex="0">{item.name}</strong>
                 <div className="button-container">
-                  <button onClick={() => handleEditClick(item.id)}>
+                  <button onClick={() => handleEditClick(item.id)} aria-label={`Editar ${item.name}`}>
                     <FontAwesomeIcon icon={faPenToSquare} className="icon" />
                   </button>
-                  <button onClick={() => handleDeleteClick(item.id)}>
+                  <button onClick={() => handleDeleteClick(item.id)} aria-label={`Deletar ${item.name}`}>
                     <FontAwesomeIcon icon={faTrash} className="icon" />
                   </button>
                 </div>
               </div>
-              <img src={`data:image/jpeg;base64, ${item.mainImage}`} alt={item.name} className="capa" />
-              <div dangerouslySetInnerHTML={{ __html: item.briefDescription }}></div>              <Link to={`/territorio/${item.id}`} className="botao">Acessar</Link>
-  
+              <img tabIndex="0" src={`data:image/jpeg;base64, ${item.mainImage}`} alt={item.name} className="capa" />
+              <div dangerouslySetInnerHTML={{ __html: item.briefDescription }} tabIndex="0"></div>
+              <Link to={`/territorio/${item.id}`} className="botao">Acessar</Link>
+
               {showAlert && territoryToDelete === item.id && (
                 <CustomAlert
-                  message="Tem certeza que deseja deletar este território?"
+                  message={`Tem certeza que deseja deletar ${item.name}?`}
                   onConfirm={handleDeleteConfirm}
                   onCancel={handleDeleteCancel}
+                  tabIndex="0"
                 />
               )}
             </article>
@@ -124,7 +126,8 @@ function GestaoConteudo() {
       )}
     </div>
   );
-  
+
 }
+
 
 export default GestaoConteudo;
