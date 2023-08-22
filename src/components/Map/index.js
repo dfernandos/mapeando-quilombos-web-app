@@ -64,6 +64,8 @@ function Map() {
   const [center, setCenter] = useState([-30.050890, -51.218222]);
   const [currentLocation, setCurrentLocation] = useState(null);
 
+  
+
   // Suponha que você tenha a função calculateDistance definida aqui
   function calculateDistance(lat1, lon1, lat2, lon2) {
     const earthRadiusKm = 6371;
