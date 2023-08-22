@@ -31,7 +31,7 @@ function Map() {
     async function loadApi() {
 
       try {
-        const response = await api.get('/territory/all'); 
+        const response = await api.get('/territory/coordinates'); 
         console.log(response.data);
         setTerritoriesCoordinates(response.data);
         setTerritoryQuantity(response.data.length);
