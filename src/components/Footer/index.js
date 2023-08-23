@@ -9,7 +9,7 @@ function Footer() {
     <footer>
       <div className="footer-content">
         <div className="footer-links">
-          <a href="/">Home</a>
+          <a href="/">Início</a>
           {user && (
             <a href="/GestaoConteudo">Gestão de Conteúdo</a>
           )}

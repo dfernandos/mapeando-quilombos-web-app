@@ -18,7 +18,7 @@ function Header() {
   return (
     <header>
       <div className="menu">
-        <Link to="/" tabIndex="1">Home |</Link>
+        <Link to="/" tabIndex="1">Início |</Link>
         {user && (
           <Link to="/GestaoConteudo" tabIndex="2">Gestão de Conteúdo |</Link>
         )}
