@@ -38,4 +38,14 @@ body {
     display: flex;
     flex-direction: column;
   }
+
+  p{
+    margin-top: 10px;
+    text-align: justify;
+
+    
+  }
   
+  .role{
+    font-weight: bold;
+  }

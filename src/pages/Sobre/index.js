@@ -8,37 +8,23 @@ function Sobre() {
       <div className="sobre-header">
           <h1>Sobre</h1>
       </div>
+          <p>
+          O propósito do Mapeando Quilombos é contribuir para o compartilhamento de saberes sobre a cultura e história afro-brasileira através do 
+          conhecimento sobre os territórios quilombolas da cidade de Porto Alegre/RS. Através dessa iniciativa, busca-se ampliar a compreensão e 
+          valorização desses espaços, compartilhando informações relevantes e promovendo a conscientização sobre a importância histórica e cultural 
+          dos quilombos na sociedade brasileira.  
+        </p>
 
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 
-          to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-          It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-          like Aldus PageMaker including versions of Lorem Ipsum. </p>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 
-          to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-          It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-          like Aldus PageMaker including versions of Lorem Ipsum. </p>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 
-          to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-          It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-          like Aldus PageMaker including versions of Lorem Ipsum. </p>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 
-          to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-          It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-          like Aldus PageMaker including versions of Lorem Ipsum. </p>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 
-          to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-          It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-          like Aldus PageMaker including versions of Lorem Ipsum. </p>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 
-          to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-          It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-          like Aldus PageMaker including versions of Lorem Ipsum. </p>
+          <p>
+          O público-alvo deste projeto são os professores e alunos da educação básica, bem como qualquer pessoa interessada nessa temática. 
+          Por meio dessa iniciativa, os professores terão a oportunidade de ampliar seus conhecimentos sobre o tema e compartilhar essas informações 
+          com os alunos em sala de aula.
+          </p>
+
+          <p>Este projeto foi criado para a disciplina de Trabalho de Conclusão II para a obtenção do grau de Tecnólogo em Sistemas para internet. </p>
+
+          <p> <span className='role'>Aluno:</span> Daniel Oliveira </p>
+          <p> <span className='role'>Orientadora:</span> Marcia Franco </p>
       </div>
       </div>
   );
