@@ -23,8 +23,10 @@ function Sobre() {
 
           <p>Este projeto foi criado para a disciplina de Trabalho de Conclusão II para a obtenção do grau de Tecnólogo em Sistemas para internet. </p>
 
-          <p> <span className='role'>Aluno:</span> Daniel Oliveira </p>
-          <p> <span className='role'>Orientadora:</span> Marcia Franco </p>
+          <p> <span className='role'>Aluno:</span> Daniel Oliveira <span className='role'>Contato:</span> danieldfs18@hotmail.com </p>
+          <span className='role'>Instagram:</span> <a href='https://www.instagram.com/dolivveiras/' target="_blank" rel="noopener noreferrer"> Ver instagram</a>
+
+          <p> <span className='role'>Orientadora:</span> Marcia Hafele Islabão Franco  <span className='role'>Contato:</span> marcia.franco@poa.ifrs.edu.br </p>
       </div>
       </div>
   );
