@@ -26,6 +26,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
     mainImage: null,
     latitude: 0,
     longitude: 0,
+    scratchEmbeb: '',
     reference: '',
     error: '',
   });
@@ -56,6 +57,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
             mainImage: territoryData.mainImage || null,
             latitude: Number(territoryData.latitude) || 0,
             longitude: Number(territoryData.longitude) || 0,
+            scratchEmbeb: territoryData.scratchEmbeb || '',
             reference: territoryData.reference || '',
           }));
         })
@@ -145,7 +147,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
     event.preventDefault();
     setImagePreview(null);
 
-    const { name, briefDescription, history, cartografia, religion, extra_content, mainImage, reference } = formData;
+    const { name, briefDescription, history, cartografia, religion, extra_content, mainImage, scratchEmbeb, reference } = formData;
     const latitude = Number(formData.latitude);
     const longitude = Number(formData.longitude);
 
@@ -160,6 +162,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
       formData.append('latitude', latitude);
       formData.append('longitude', longitude);
       formData.append('file', mainImage);
+      formData.append('scratchEmbeb', scratchEmbeb);
       formData.append('reference', reference);
 
       try {
@@ -193,6 +196,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           mainImage: null,
           latitude: 0,
           longitude: 0,
+          scratchEmbeb: "",
           reference: "",
           error: ""
         });
@@ -216,17 +220,19 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         </p>
       )}
       <form onSubmit={handleSave} encType='multipart/form-data'>
-      <label htmlFor="nome">Nome:</label>
+      <label htmlFor="nome">Nome:<span aria-hidden="true" className="mandatory">*</span></label>
         <input
         placeholder='Digite aqui o nome do território quilombola'
           type='text'
           id="name"
+          aria-required="true"
           value={formData.name}
           onChange={(event) => setFormData({ ...formData, name: event.target.value })}
         />
-        <label htmlFor="briefDescription">Breve Descrição:</label>
+        <label htmlFor="briefDescription">Breve Descrição <span aria-hidden="true" className="mandatory"><span aria-hidden="true" className="mandatory">*</span></span>:</label>
         <ReactQuill
           theme='snow'
+          aria-required="true"
           value={formData.briefDescription}
           onChange={(value) => setFormData({ ...formData, briefDescription: value })}
           className="react-quill"
@@ -234,9 +240,10 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           placeholder='Digite aqui a descrição'
           tabIndex="0"
         />
-        <label htmlFor="História">História:</label>
+        <label htmlFor="História">História:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill 
         theme='snow'
+        aria-required="true"
          value={formData.history}
          onChange={(value) => setFormData({ ...formData, history: value })}
          className="react-quill"
@@ -244,18 +251,20 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         placeholder='Digite aqui a história do território quilombola'
         tabIndex="0"/>
 
-        <label htmlFor="Cartografia">Cartografia:</label>
+        <label htmlFor="Cartografia">Cartografia:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill
           theme='snow'
+          aria-required="true"
           value={formData.cartografia}
           onChange={(value) => setFormData({ ...formData, cartografia: value })}
           className="react-quill"
           aria-describedby="historyHint"
         placeholder='Digite aqui a cartografia território quilombola'/>
 
-        <label htmlFor="Cartografia">Religião:</label>
+        <label htmlFor="Cartografia">Religião:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill 
         theme='snow' 
+        aria-required="true"
         value={formData.religion} 
         onChange={(value) => setFormData({ ...formData, religion: value })} 
         className="react-quill"
@@ -272,18 +281,21 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         aria-describedby="conteúdoExtrahint"
         placeholder='Digite aqui sobre a religião do território quilombola'/>
 
-        <label tmlFor="Latitude"> Latitude:</label>
+        <label tmlFor="Latitude"> Latitude:<span aria-hidden="true" className="mandatory">*</span> </label>
         <input type='text' value={formData.latitude} onChange={(event) => setFormData({ ...formData, latitude: event.target.value })} aria-describedby="latitudeHint"
-        placeholder='Insira aqui a latitude'/>
+        placeholder='Insira aqui a latitude' aria-required="true"
+        />
 
-        <label tmlFor="Longitude"> longitude:</label>
+        <label tmlFor="Longitude"> longitude:<span aria-hidden="true" className="mandatory">*</span></label>
         <input type='text' value={formData.longitude} onChange={(event) => setFormData({ ...formData, longitude: event.target.value })} aria-describedby="longitudeHint"
-        placeholder='Insira aqui a longitude'/>
+        placeholder='Insira aqui a longitude' aria-required="true"
+        />
 
-        <label tmlFor="Imagem">Imagem (capa):</label>
+        <label tmlFor="Imagem">Imagem (capa):<span aria-hidden="true" className="mandatory">*</span></label>
         <input
           type="file"
           name="file"
+          aria-required="true"
           onChange={handleImageChange}
         />
         {/* Show the image preview */}
@@ -293,10 +305,19 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           <img src={`data:image/jpeg;base64, ${formData.mainImage}`} alt={formData.name} className="capa" />
         )}
 
-      <label htmlFor="reference">Referencias:</label>
+      <label htmlFor="embedCode">Vídeos/Conteúdos para incorporação:</label>
+      <textarea
+        id="embedCode"
+        value={formData.scratchEmbeb}
+        onChange={(event) => setFormData({ ...formData, scratchEmbeb: event.target.value })}
+        placeholder="Cole o código de incorporação aqui"
+      ></textarea>
+
+      <label htmlFor="reference">Referencias:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill
           className="react-quill"
           theme='snow'
+          aria-required="true"
           value={formData.reference}
           onChange={(value) => setFormData({ ...formData, reference: value })}
           aria-describedby="referenciaHint"
