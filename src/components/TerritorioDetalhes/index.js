@@ -4,7 +4,7 @@ import html2pdf from 'html2pdf.js';
 
 function TerritorioDetalhes({ territory }) {
   const generatePDF = () => {
-    const contentElement = document.getElementById('territorio-content');
+    const contentElement = document.getElementById('toBeDownloaded');
     const opt = {
       margin:       10,
       filename:     'territorio.pdf',
@@ -18,15 +18,16 @@ function TerritorioDetalhes({ territory }) {
 
   return (
     <div className="territorio-detalhes">
-      <div className="territorio-info">
+      <div className="territorio-info" id="toBeDownloaded">
         <div className="territorio-header">
           <div className="header-content">
             <h2>{territory.name}</h2>
             <button className="button" onClick={generatePDF}>Baixar PDF</button>
           </div>
-          <img src={`data:image/jpeg;base64, ${territory.mainImage}`} alt={territory.name} className="capa" />
         </div>
         <div className="territorio-text" id="territorio-content">
+        <img src={`data:image/jpeg;base64, ${territory.mainImage}`} alt={territory.name} className="capa" />
+
           <h3>Descrição</h3>
           <div dangerouslySetInnerHTML={{ __html: territory.briefDescription }}></div>
           <h3>História</h3>
@@ -41,6 +42,14 @@ function TerritorioDetalhes({ territory }) {
               <div dangerouslySetInnerHTML={{ __html: territory.extra_content }}></div>
             </>
           )}
+
+          {territory.scratchEmbeb && ( // Renderizar se territory.extra_content existe
+            <>
+              <h3>Assista este vídeo sobre o {territory.name}</h3>
+              <div dangerouslySetInnerHTML={{ __html: territory.scratchEmbeb }}></div>
+            </>
+          )}
+
           <h3>Referências</h3>
           <div dangerouslySetInnerHTML={{ __html: territory.reference }}></div>
         </div>
