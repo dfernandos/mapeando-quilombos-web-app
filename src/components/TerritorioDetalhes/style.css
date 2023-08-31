@@ -36,7 +36,7 @@
   margin: 0;
 }
 
-.territorio-header img {
+#territorio-content img {
   width: 100%;
   max-height: 400px;
   object-fit: cover;
@@ -99,4 +99,8 @@ hr{
 
 .button:hover {
   background-color: #a06b6b;
+}
+
+.mandatory{
+  color: red;
 }
