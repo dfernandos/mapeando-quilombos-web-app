@@ -7,7 +7,7 @@ function Header() {
   const { user } = useAuth();
 
   const handleLogout = async (e) => {
-    e.preventDefault(); // Evitar o comportamento padrão do link
+    e.preventDefault();
     try {
       await auth.signOut();
     } catch (error) {
@@ -18,18 +18,18 @@ function Header() {
   return (
     <header>
       <div className="menu">
-        <Link to="/" tabIndex="1">Início |</Link>
+        <Link to="/" tabIndex="1">Início <span aria-hidden="true" >|</span></Link>
         {user && (
-          <Link to="/GestaoConteudo" tabIndex="2">Gestão de Conteúdo |</Link>
+          <Link to="/GestaoConteudo" tabIndex="2">Gestão de Conteúdo <span aria-hidden="true" >|</span></Link>
         )}
         {!user && (
           <>
-            <Link to="/sobre" tabIndex="2">Sobre |</Link>
-            <Link to="/contato" tabIndex="3">Contato |</Link>
+            <Link to="/sobre" tabIndex="2">Sobre <span aria-hidden="true" >|</span></Link>
+            <Link to="/contato" tabIndex="3">Contato <span aria-hidden="true" >|</span></Link>
           </>
         )}
         {user && (
-          <Link to="/signup" tabIndex="3">Cadastrar usuário |</Link>
+          <Link to="/signup" tabIndex="3">Cadastrar usuário <span aria-hidden="true" >|</span></Link>
         )}
         {user ? (
           <a href="/" onClick={handleLogout} tabIndex="4">Sair </a> 
