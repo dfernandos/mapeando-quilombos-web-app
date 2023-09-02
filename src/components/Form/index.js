@@ -6,6 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import api from '../../Api';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { Tooltip } from 'react-tooltip'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 
 function Form({ territoryData, territoryId, onFormSubmit }) {
@@ -305,16 +309,23 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           <img src={`data:image/jpeg;base64, ${formData.mainImage}`} alt={formData.name} className="capa" />
         )}
 
-      <label htmlFor="embedCode">Vídeos/Conteúdos para incorporação:</label>
-      <textarea
-        id="embedCode"
-        value={formData.scratchEmbeb}
-        onChange={(event) => setFormData({ ...formData, scratchEmbeb: event.target.value })}
-        placeholder="Cole o código de incorporação aqui"
-        rows="7"
-      ></textarea>
+      
+        <div className="label-container">
+          <label htmlFor="embedCode" className="label-text">
+            Vídeos/Conteúdos para incorporação:
+          </label>
+          <FontAwesomeIcon icon={faInfoCircle} className="info-icon" data-tooltip-id="my-tooltip" data-tooltip-content="Inserir o iFrame do conteúdo que desejas incorporar!" />
+        </div>
+        <textarea
+          id="embedCode"
+          value={formData.scratchEmbeb}
+          onChange={(event) => setFormData({ ...formData, scratchEmbeb: event.target.value })}
+          placeholder="Cole o código de incorporação aqui"
+          rows="7"
+        ></textarea>
+        <Tooltip id="my-tooltip" place="bottom" effect="solid" />
 
-      <label htmlFor="reference">Referencias:<span aria-hidden="true" className="mandatory">*</span></label>
+    <label htmlFor="reference">Referencias:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill
           className="react-quill"
           theme='snow'

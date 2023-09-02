@@ -98,3 +98,11 @@
 .form-container .react-quill {
   margin-bottom: 80px;
 }
+.label-container {
+  display: flex;
+  align-items: center; /* Alinha verticalmente ao centro */
+}
+
+.label-text {
+  margin-right: 10px; /* Espaçamento à direita da label */
+}
