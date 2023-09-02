@@ -46,7 +46,9 @@ function TerritorioDetalhes({ territory }) {
           {territory.scratchEmbeb && ( // Renderizar se territory.extra_content existe
             <>
               <h3>Assista este vídeo sobre o {territory.name}</h3>
-              <div dangerouslySetInnerHTML={{ __html: territory.scratchEmbeb }}></div>
+              <div className="video-container">
+                <div dangerouslySetInnerHTML={{ __html: territory.scratchEmbeb }}></div>
+              </div>
             </>
           )}
 
