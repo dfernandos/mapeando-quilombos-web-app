@@ -48,6 +48,7 @@
 .form-container img {
   max-width: 100%; /* Adjust the maximum width to control the image size */
   height: auto; /* Maintain aspect ratio of the image */
+  margin-bottom: 10px;
 }
 
 .form-container button {

@@ -311,6 +311,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         value={formData.scratchEmbeb}
         onChange={(event) => setFormData({ ...formData, scratchEmbeb: event.target.value })}
         placeholder="Cole o código de incorporação aqui"
+        rows="7"
       ></textarea>
 
       <label htmlFor="reference">Referencias:<span aria-hidden="true" className="mandatory">*</span></label>
