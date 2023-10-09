@@ -8,6 +8,9 @@
 
   .mapa{
     margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 20px;
+
   }
 
   .message {
@@ -23,4 +26,8 @@
     margin-bottom: 10px;
     font-family: Arial, sans-serif;
   }
+
+.mapPopUp{
+  color: black;
+}
   

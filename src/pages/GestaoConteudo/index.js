@@ -85,7 +85,7 @@ function GestaoConteudo() {
       <ToastContainer tabIndex="0"/>
 
       <div className='header'>
-        <h1 tabIndex="0">Lista de Territórios Quilombolas</h1>
+        <h1 tabIndex="0">Lista de Territorios Quilombolas</h1>
         <Link to="/cadastro" className="botao">+ Adicionar</Link>
       </div>
 

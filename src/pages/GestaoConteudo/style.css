@@ -26,12 +26,11 @@
     justify-content: space-between;
     width: 100%;
     max-width: 600px;
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     margin: 8px;
     padding: 20px;
-    background: #f7eaea;
+    /* background: #f7eaea; */
   }
   
   .headerItem {
@@ -44,6 +43,7 @@
     font-size: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
+    color: #fff;
   }
   
   .button-container {
@@ -53,7 +53,7 @@
   
   .button-container button {
     height: 30px;
-    background-color: #bc8f8f;
+    background-color: #842236;
     border-radius: 5px;
     color: #fff;
     border: none;
@@ -73,12 +73,12 @@
   }
   
   .button-container button:hover {
-    background-color: #a06b6b;
+    background-color: #b13020;
   }
   
   .botao {
     height: 30px;
-    background-color: #bc8f8f;
+    background-color: #842236;
     border-radius: 5px;
     color: #fff;
     border: none;
@@ -96,7 +96,7 @@
   }
   
   .botao:hover {
-    background-color: #a06b6b;
+    background-color: #b13020;
   }
   
   .capa {

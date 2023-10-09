@@ -12,41 +12,48 @@ body {
 .sobre-detalhes {
     display: flex;
     justify-content: center;
+    font-size: 20px;
   }
   
   .sobre-info {
     width: 800px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    /* background-color: #fff; */
+    /* border-radius: 10px; */
+    /* box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); */
     margin: 20px;
     padding: 20px;
   }
   
   .territorio-info h2 {
     text-align: center;
-    font-size: 24px;
+    font-size: 35px;
+    color: white;
   }
   
   .sobre-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
+    color: white;
   }
 
   
   .territorio-text {
     display: flex;
     flex-direction: column;
+    color: white;
+    font-size: 25;
   }
 
   p{
     margin-top: 10px;
     text-align: justify;
-
-    
+    color: white;
+    font-size: 25;
   }
   
   .role{
     font-weight: bold;
     margin-left: 5px;
+    color: white;
+
   }

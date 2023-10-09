@@ -4,6 +4,11 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  @font-face {
+    font-family: 'african-font';
+    src: url('../../fonts/african-font.ttf') format('truetype');
+  }
   
   /* Estilo do corpo da página */
   body {
@@ -23,7 +28,9 @@
     font-size: 2.5rem;
     margin-bottom: 10px;
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: 'african-font', Arial, sans-serif;
+    color: #2b9781;
+
   }
   
   .Map {

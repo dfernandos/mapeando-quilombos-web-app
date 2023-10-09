@@ -25,7 +25,7 @@ function Map() {
   
   const [territoriesCoordinates, setTerritoriesCoordinates] = useState([]);
 
-  const [territoryQuantity, setTerritoryQuantity] = useState(0);
+  // const [territoryQuantity, setTerritoryQuantity] = useState(0);
 
   useEffect(() => {
     async function loadApi() {
@@ -34,7 +34,7 @@ function Map() {
         const response = await api.get('/territory/coordinates'); 
         console.log(response.data);
         setTerritoriesCoordinates(response.data);
-        setTerritoryQuantity(response.data.length);
+        // setTerritoryQuantity(response.data.length);
 
       } catch (error) {
         console.error("Erro ao carregar os territórios:", error);
@@ -135,17 +135,19 @@ function Map() {
   return (
     <div className='mapa'>
 
-  <span className="message" tabIndex="0">Existem {territoryQuantity} quilombos em Porto Alegre</span>
+  {/* <span className="message" tabIndex="0">Existem {territoryQuantity} quilombos em Porto Alegre</span> */}
 
     <MapContainer
       center={center}
       zoom={13}
-      style={{ width: '70vw', height: '70vh' }}
+      style={{ width: '50vw', height: '60vh' }}
       aria-label="Mapa com os territórios"
+      className='mapa'
     >     
     <ToastContainer />
 
       <TileLayer
+        aria-hidden="true"
         alt='Mapa feito com leaflet, maptiler e OpenStreetMap'
         url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=10GyEcePLHFPQHAXn11F"
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
@@ -198,22 +200,21 @@ function Map() {
           key={marker.name}
           position={[marker.latitude, marker.longitude]}
           icon={customMarkerIcon}
-          title={marker.name} 
-          role="button" 
+          title={marker.name}  
           eventHandlers={{
             click: () => handleTerritoryMarkerClick(marker),
           }}
           alt={marker.name}
         >
           <Popup>
-            <h2>{marker.name}</h2>
+            <h2 className='mapPopUp'>{marker.name}</h2>
             {selectedTerritory && selectedTerritory.name === marker.name && selectedTerritory.distance && (
-              <p>
+              <p className='mapPopUp'>
                 A Distância do {selectedTerritory.name} até a sua localização atual é de {selectedTerritory.distance} km{' '}
                 <FontAwesomeIcon icon={faFaceSmile} />
               </p>  
             )}
-            <p> Para mais informações
+            <p className='mapPopUp'> Para mais informações
             <span
                 onClick={() => getTerritory(marker.id)}
                 role="link"
@@ -224,6 +225,7 @@ function Map() {
                   cursor: 'pointer',
                   marginLeft: 2,
                 }}
+                className='mapPopUp'
               >
               clique aqui
             </span>              
@@ -235,7 +237,7 @@ function Map() {
       {currentLocation && (
         <Marker position={currentLocation} icon={customIcon} title="Você está aqui"> {/* Adicionar o atributo title aqui também */}
           <Popup>
-            <p>Você está aqui</p>
+            <p aria-label="Você está aqui" className='mapPopUp'>Você está aqui</p>
           </Popup>
         </Marker>
       )}

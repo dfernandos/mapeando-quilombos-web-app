@@ -8,7 +8,6 @@
   max-width: 800px; /* Define a largura máxima para telas maiores */
   justify-content: center;
   align-items: center;
-  background-color: #f7eaea; /* Cor de fundo do formulário */
   padding: 20px; /* Adicione espaçamento interno ao formulário */
   border-radius: 10px; /* Adicione bordas arredondadas para o formulário */
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Adicione sombra para destacar o formulário */
@@ -56,7 +55,7 @@
   width: 100%; /* Ocupa toda a largura disponível */
   padding: 12px; /* Adicione espaçamento interno para o botão */
   font-size: 18px; /* Tamanho da fonte para o botão */
-  background-color: #bc8f8f; /* Cor de fundo do botão */
+  background-color: #842236;
   color: #fff; /* Cor do texto do botão */
   border: none; /* Remova a borda do botão */
   border-radius: 5px; /* Adicione bordas arredondadas para o botão */
@@ -65,7 +64,7 @@
 }
 
 .form-container button:hover {
-  background-color: #a06b6b; /* Cor de fundo do botão ao passar o mouse */
+  background-color: #b13020;
 }
 
 .form-container .error {

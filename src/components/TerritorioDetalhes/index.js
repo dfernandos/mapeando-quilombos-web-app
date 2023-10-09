@@ -3,6 +3,7 @@ import './style.css';
 import html2pdf from 'html2pdf.js';
 
 function TerritorioDetalhes({ territory }) {
+  
   const generatePDF = () => {
     const contentElement = document.getElementById('toBeDownloaded');
     const opt = {
@@ -25,7 +26,7 @@ function TerritorioDetalhes({ territory }) {
             <button className="button" onClick={generatePDF}>Baixar PDF</button>
           </div>
         </div>
-        <div className="territorio-text" id="territorio-content">
+        <div className="territorio-text" id="territorio-content" >
         <img src={`data:image/jpeg;base64, ${territory.mainImage}`} alt={territory.name} className="capa" />
 
           <h3>Descrição</h3>
@@ -36,14 +37,14 @@ function TerritorioDetalhes({ territory }) {
           <div dangerouslySetInnerHTML={{ __html: territory.cartografia }}></div>
           <h3>Religião</h3>
           <div dangerouslySetInnerHTML={{ __html: territory.religion }}></div>
-          {territory.extra_content && ( // Renderizar se territory.extra_content existe
+          {territory.extra_content && ( 
             <>
               <h3>Conteúdo Extra</h3>
               <div dangerouslySetInnerHTML={{ __html: territory.extra_content }}></div>
             </>
           )}
 
-          {territory.scratchEmbeb && ( // Renderizar se territory.extra_content existe
+          {territory.scratchEmbeb && (
             <>
               <h3>Assista este vídeo sobre o {territory.name}</h3>
               <div className="video-container">

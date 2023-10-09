@@ -48,7 +48,7 @@ function Signup() {
   return (
     <div className="signup-container">
       <div className="signup-card">
-        <h2>Cadastro de usuário</h2>
+        <h2 className='signup-title'>Cadastro de usuário</h2>
         {error && <p className="error-message">{error}</p>} {/* Mostra mensagem de erro */}
         <form className="signup-form" onSubmit={handleSignup}>
           <input

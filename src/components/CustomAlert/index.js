@@ -5,7 +5,7 @@ function CustomAlert({ message, onConfirm, onCancel }) {
   return (
     <div className="custom-alert-overlay">
       <div className="custom-alert">
-        <p>{message}</p>
+        <p className='message-Alert'>{message}</p>
         <div className="alert-buttons">
           <button onClick={onCancel}>Cancelar</button>
           <button onClick={onConfirm}>Confirmar</button>

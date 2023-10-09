@@ -1,11 +1,12 @@
 header {
     display: flex;
+    margin-top: 10px;
     justify-content: center;
     align-items: center;
     font-size: 35px;
     height: 60px;
     width: 100%;
-    background-color: #BC8F8F;
+    /* background-color: #BC8F8F; */
     color: #fff;
     font-family: 'Arial', sans-serif; /* Escolha uma fonte agradável e legível */
     padding: 0 20px; /* Adicione espaçamento interno ao header */
@@ -13,8 +14,9 @@ header {
   
   header a {
     color: #fff;
-    font-size: 20px;
+    font-size: 30px;
     text-decoration: none; /* Remova a decoração de texto do link */
+    margin-right: 15px;
   }
   
   header a + a {
