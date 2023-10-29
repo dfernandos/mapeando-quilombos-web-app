@@ -1,32 +1,13 @@
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 50vh; /* Defina a altura mínima como 100% da viewport */
-  }
-  
-  .login-card {
-    margin-top: 50px;
-    width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
+
   .input-field {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    margin-bottom: 8px;
+    margin-top: 8px;
   }
   
-  .login-button {
+  .forgot-button {
     background-color: #842236;
     color: white;
     padding: 10px 20px;
@@ -47,8 +28,9 @@
     margin-bottom: 10px; /* Adicione espaçamento abaixo da mensagem de erro */
   }
 
-  .login-title{
+  .forgotPassword-title{
     margin-bottom: 10px;
     color: white;
     font-style: bold;
+    margin-top: 20px;
   }

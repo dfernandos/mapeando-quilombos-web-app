@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { auth } from '../../firebaseConfig';
-import './index.css'; // Importe o arquivo de estilos para o Login
+import ForgotPassword from '../ForgotPassword/ForgotPassword.js'; // Importe o componente Esqueci Minha Senha
+
+import './index.css';
 
 function Login() {
   const navigate = useNavigate();
@@ -35,6 +37,13 @@ function Login() {
     }
   };
 
+  // eslint-disable-next-line
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+
+  const handleShowForgotPassword = () => {
+    setShowForgotPassword(true);
+  }
+
   return (
     <div className="login-container">
       <div className="login-card">
@@ -56,7 +65,10 @@ function Login() {
             className="input-field"
           />
           <button type="submit" className="login-button">Entrar</button>
+          <button type="button" onClick={handleShowForgotPassword} className="login-button">Esqueci Minha Senha</button>
         </form>
+        {showForgotPassword && <ForgotPassword />}
+
       </div>
     </div>
   );
