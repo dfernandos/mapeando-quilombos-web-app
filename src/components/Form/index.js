@@ -283,7 +283,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           onChange={(value) => setFormData({ ...formData, extra_content: value })
         }
         aria-describedby="conteúdoExtrahint"
-        placeholder='Digite aqui sobre a religião do território quilombola'/>
+        placeholder='Digite aqui sobre a conteúdo extra do território quilombola'/>
 
         <label tmlFor="Latitude"> Latitude:<span aria-hidden="true" className="mandatory">*</span> </label>
         <input type='text' value={formData.latitude} onChange={(event) => setFormData({ ...formData, latitude: event.target.value })} aria-describedby="latitudeHint"
