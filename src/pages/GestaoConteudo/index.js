@@ -10,6 +10,8 @@ import Loading from 'react-loading';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../Api';
+import { auth } from '../../firebaseConfig';
+
 
 function GestaoConteudo() {
   const [territories, setTerritories] = useState([]);
@@ -54,9 +56,17 @@ function GestaoConteudo() {
     setTerritoryToDelete(territoryId);
   }
 
-  function handleDeleteConfirm() {
+  async function handleDeleteConfirm() {
     const territoryId = territoryToDelete;
-    api.delete(`/territory/${territoryId}`)
+
+    const token = await auth.currentUser.getIdToken(); // Obtenha o token de autenticação Firebase
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`, // Inclua o token no cabeçalho da solicitação
+        'Content-Type': 'multipart/form-data', // Defina o tipo de conteúdo como 'multipart/form-data'
+      },
+    };
+    api.delete(`/territory/delete/${territoryId}`, config)
       .then((response) => {
         console.log('Território deletado com sucesso!');
         toast.success('Território deletado com sucesso!');

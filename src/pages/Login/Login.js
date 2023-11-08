@@ -23,7 +23,6 @@ function Login() {
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      console.log('Logged in successfully');
 
       const redirectTo = new URLSearchParams(location.search).get('redirectTo');
       if (redirectTo) {

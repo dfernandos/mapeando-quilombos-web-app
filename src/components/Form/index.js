@@ -9,6 +9,8 @@ import 'react-quill/dist/quill.snow.css';
 import { Tooltip } from 'react-tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { auth } from '../../firebaseConfig';
+
 
 
 
@@ -171,14 +173,30 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
 
       try {
         if (territoryId) {
+          const token = await auth.currentUser.getIdToken(); // Obtenha o token de autenticação Firebase
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`, // Inclua o token no cabeçalho da solicitação
+              'Content-Type': 'multipart/form-data', // Defina o tipo de conteúdo como 'multipart/form-data'
+            },
+          };
           // If territoryId is present, it means we are updating an existing territory
-          await api.put(`/territory/update/${territoryId}`, formData);
+          await api.put(`/territory/update/${territoryId}`, formData, config);
           console.log('Território atualizado com sucesso!');
           toast.success('Território editado com sucesso!');
 
         } else {
           // If territoryId is not present, it means we are saving a new territory
-          await api.post('/territory/create', formData);
+
+                  // If territoryId is not present, it means we are saving a new territory
+        const token = await auth.currentUser.getIdToken(); // Obtenha o token de autenticação Firebase
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`, // Inclua o token no cabeçalho da solicitação
+            'Content-Type': 'multipart/form-data', // Defina o tipo de conteúdo como 'multipart/form-data'
+          },
+        };
+          await api.post('/territory/create', formData, config);
           console.log('Território cadastrado com sucesso!');
           toast.success('Território cadastrado com sucesso!');
         }
