@@ -2,19 +2,18 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/analytics';
 
-
 const firebaseConfig = {
-    apiKey: "AIzaSyB1sPjMwxRuNeIJII40hjahe_hOsi9Pofg",
-    authDomain: "mapeando--quilombos.firebaseapp.com",
-    projectId: "mapeando--quilombos",
-    storageBucket: "mapeando--quilombos.appspot.com",
-    messagingSenderId: "76027542153",
-    appId: "1:76027542153:web:d8cd4f8f49cf84859ce458",
-    measurementId: "G-10RD7E30PR"
-  };
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+};
 
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-  export const auth = firebase.auth();
-  
-  export default firebase;
+export const auth = firebase.auth();
+
+export default firebase;
