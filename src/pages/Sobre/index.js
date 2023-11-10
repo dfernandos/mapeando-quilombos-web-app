@@ -1,6 +1,18 @@
 import './style.css';
+import React, { useEffect } from 'react';
+
 
 function Sobre() {
+
+  useEffect(() => {
+    const metaTag = document.createElement('meta');
+    metaTag.name = 'google-site-verification';
+    metaTag.content = 'fmJt71uoPjLi2CosKCl6vVffazD2dgQfMRQBGxXPsl0';
+    document.head.appendChild(metaTag);
+    return () => {
+      document.head.removeChild(metaTag);
+    };
+  }, []);
 
   return (
     <div className="sobre-detalhes">
