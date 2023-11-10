@@ -65,8 +65,6 @@ function Map() {
   const [currentLocation, setCurrentLocation] = useState(null);
 
   
-
-  // Suponha que você tenha a função calculateDistance definida aqui
   function calculateDistance(lat1, lon1, lat2, lon2) {
     const earthRadiusKm = 6371;
     const dLat = deg2rad(lat2 - lat1);
@@ -235,7 +233,7 @@ function Map() {
       ))}
 
       {currentLocation && (
-        <Marker position={currentLocation} icon={customIcon} title="Você está aqui"> {/* Adicionar o atributo title aqui também */}
+        <Marker position={currentLocation} icon={customIcon} title="Você está aqui"> 
           <Popup>
             <p aria-label="Você está aqui" className='mapPopUp'>Você está aqui</p>
           </Popup>
