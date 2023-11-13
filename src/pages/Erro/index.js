@@ -2,7 +2,7 @@ function Erro() {
     return (
       <div>
   
-        <h1>Pagina nao encontrada</h1>
+        <h1 role="error">Pagina nao encontrada</h1>
   
       </div>
     );
