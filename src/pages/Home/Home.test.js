@@ -11,7 +11,7 @@ test('renders the landing page with the correct title', () => {
   render(<Home />);
   
   // Check if the title is rendered correctly
-  expect(screen.getByRole("pageTitle")).toHaveTextContent('Mapa dos Quilombos de Porto Alegre');
+  expect(screen.getByText('Mapa dos Quilombos de Porto Alegre')).toBeInTheDocument();
 
   // Check if the mock map is rendered
   expect(screen.getByTestId('mock-map')).toBeInTheDocument();

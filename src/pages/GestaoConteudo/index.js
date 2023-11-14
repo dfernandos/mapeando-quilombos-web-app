@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import api from '../../Api';
 import { auth } from '../../firebaseConfig';
 
-
 function GestaoConteudo() {
   const [territories, setTerritories] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
@@ -94,7 +93,7 @@ function GestaoConteudo() {
       <Breadcrumb items={breadcrumbItems} />
       <ToastContainer tabIndex="0"/>
 
-      <div className='header'>
+      <div className='header' data-testid="header-list">
         <h1 tabIndex="0">Lista de Territorios Quilombolas</h1>
         <Link to="/cadastro" className="botao">+ Adicionar</Link>
       </div>

@@ -242,7 +242,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         </p>
       )}
       <form onSubmit={handleSave} encType='multipart/form-data'>
-      <label htmlFor="nome">Nome:<span aria-hidden="true" className="mandatory">*</span></label>
+      <label tmlfor="nome">Nome:<span aria-hidden="true" className="mandatory">*</span></label>
         <input
         placeholder='Digite aqui o nome do território quilombola'
           type='text'
@@ -251,7 +251,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           value={formData.name}
           onChange={(event) => setFormData({ ...formData, name: event.target.value })}
         />
-        <label htmlFor="briefDescription">Breve Descrição <span aria-hidden="true" className="mandatory"><span aria-hidden="true" className="mandatory">*</span></span>:</label>
+        <label tmlfor="briefDescription">Breve Descrição <span aria-hidden="true" className="mandatory"><span aria-hidden="true" className="mandatory">*</span></span>:</label>
         <ReactQuill
           theme='snow'
           aria-required="true"
@@ -262,7 +262,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           placeholder='Digite aqui a descrição'
           tabIndex="0"
         />
-        <label htmlFor="História">História:<span aria-hidden="true" className="mandatory">*</span></label>
+        <label tmlfor="História">História:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill 
         theme='snow'
         aria-required="true"
@@ -273,7 +273,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         placeholder='Digite aqui a história do território quilombola'
         tabIndex="0"/>
 
-        <label htmlFor="Cartografia">Cartografia:<span aria-hidden="true" className="mandatory">*</span></label>
+        <label tmlfor="Cartografia">Cartografia:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill
           theme='snow'
           aria-required="true"
@@ -283,7 +283,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           aria-describedby="historyHint"
         placeholder='Digite aqui a cartografia território quilombola'/>
 
-        <label htmlFor="Cartografia">Religião:<span aria-hidden="true" className="mandatory">*</span></label>
+        <label tmlfor="religion">Religião:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill 
         theme='snow' 
         aria-required="true"
@@ -293,7 +293,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         aria-describedby="ReligiaoHint"
         placeholder='Digite aqui sobre a religião do território quilombola'/>
 
-        <label htmlFor="Conteúdo Extra">Conteúdo Extra:</label>
+        <label tmlfor="Conteúdo Extra">Conteúdo Extra:</label>
         <ReactQuill
         className="react-quill"
           theme='snow'
@@ -303,17 +303,17 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         aria-describedby="conteúdoExtrahint"
         placeholder='Digite aqui sobre a conteúdo extra do território quilombola'/>
 
-        <label tmlFor="Latitude"> Latitude:<span aria-hidden="true" className="mandatory">*</span> </label>
+        <label tmlfor="Latitude">Latitude:<span aria-hidden="true" className="mandatory">*</span> </label>
         <input type='text' value={formData.latitude} onChange={(event) => setFormData({ ...formData, latitude: event.target.value })} aria-describedby="latitudeHint"
         placeholder='Insira aqui a latitude' aria-required="true"
         />
 
-        <label tmlFor="Longitude"> longitude:<span aria-hidden="true" className="mandatory">*</span></label>
+        <label tmlfor="Longitude"> Longitude:<span aria-hidden="true" className="mandatory">*</span></label>
         <input type='text' value={formData.longitude} onChange={(event) => setFormData({ ...formData, longitude: event.target.value })} aria-describedby="longitudeHint"
         placeholder='Insira aqui a longitude' aria-required="true"
         />
 
-        <label tmlFor="Imagem">Imagem (capa):<span aria-hidden="true" className="mandatory">*</span></label>
+        <label tmlfor="Imagem">Imagem (capa):<span aria-hidden="true" className="mandatory">*</span></label>
         <input
           type="file"
           name="file"
@@ -329,7 +329,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
 
       
         <div className="label-container">
-          <label htmlFor="embedCode" className="label-text">
+          <label tmlfor="embedCode" className="label-text">
             Vídeos/Conteúdos para incorporação:
           </label>
           <FontAwesomeIcon icon={faInfoCircle} className="info-icon" data-tooltip-id="my-tooltip" data-tooltip-content="Inserir o iFrame do conteúdo que desejas incorporar!" />
@@ -343,7 +343,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         ></textarea>
         <Tooltip id="my-tooltip" place="bottom" effect="solid" />
 
-    <label htmlFor="reference">Referencias:<span aria-hidden="true" className="mandatory">*</span></label>
+    <label tmlfor="reference">Referencias:<span aria-hidden="true" className="mandatory">*</span></label>
         <ReactQuill
           className="react-quill"
           theme='snow'
