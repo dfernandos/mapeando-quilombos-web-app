@@ -26,3 +26,8 @@ Após, você precisa rodar o projeto
 ```bash
   npm start
 ```
+
+Como rodar o projeto:
+```bash
+  npm test
+```
