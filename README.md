@@ -27,6 +27,13 @@ Após, você precisa rodar o projeto
   npm start
 ```
 
+#### CI/CD
+
+- You can check the CI/CD status in the menu Actions on GitHub
+- The pipeline has 2 steps:
+  - Build
+  - Tests
+
 Como rodar o projeto:
 ```bash
   npm test
