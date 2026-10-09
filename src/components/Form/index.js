@@ -37,6 +37,13 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
     error: '',
   });
 
+  // ReactQuill fires onChange when its value prop is applied. That call still
+  // closes over the previous state and would wipe the loaded territory.
+  const updateRichText = (field) => (value, _delta, source) => {
+    if (source && source !== 'user') return;
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
   useEffect(() => {
     if (isActionSuccess) {
       toast.success('Território cadastrado com sucesso!');
@@ -154,8 +161,13 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
     setImagePreview(null);
 
     const { name, briefDescription, history, cartografia, religion, extra_content, mainImage, scratchEmbeb, reference } = formData;
-    const latitude = Number(formData.latitude);
-    const longitude = Number(formData.longitude);
+    const latitude = Number(String(formData.latitude).trim().replace(',', '.'));
+    const longitude = Number(String(formData.longitude).trim().replace(',', '.'));
+
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      setFormData({ ...formData, error: 'Informe latitude e longitude válidas, com ponto como separador decimal. Exemplo: -30.034 e -51.217.' });
+      return;
+    }
 
     if (name && briefDescription && history && cartografia && religion && mainImage && typeof reference === 'string') {
       const formData = new FormData();
@@ -256,7 +268,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           theme='snow'
           aria-required="true"
           value={formData.briefDescription}
-          onChange={(value) => setFormData({ ...formData, briefDescription: value })}
+          onChange={updateRichText('briefDescription')}
           className="react-quill"
           aria-describedby="briefDescriptionHint"
           placeholder='Digite aqui a descrição'
@@ -267,7 +279,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         theme='snow'
         aria-required="true"
          value={formData.history}
-         onChange={(value) => setFormData({ ...formData, history: value })}
+         onChange={updateRichText('history')}
          className="react-quill"
          aria-describedby="historyHint"
         placeholder='Digite aqui a história do território quilombola'
@@ -278,7 +290,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           theme='snow'
           aria-required="true"
           value={formData.cartografia}
-          onChange={(value) => setFormData({ ...formData, cartografia: value })}
+          onChange={updateRichText('cartografia')}
           className="react-quill"
           aria-describedby="historyHint"
         placeholder='Digite aqui a cartografia território quilombola'/>
@@ -288,7 +300,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         theme='snow' 
         aria-required="true"
         value={formData.religion} 
-        onChange={(value) => setFormData({ ...formData, religion: value })} 
+        onChange={updateRichText('religion')} 
         className="react-quill"
         aria-describedby="ReligiaoHint"
         placeholder='Digite aqui sobre a religião do território quilombola'/>
@@ -298,8 +310,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
         className="react-quill"
           theme='snow'
           value={formData.extra_content}
-          onChange={(value) => setFormData({ ...formData, extra_content: value })
-        }
+          onChange={updateRichText('extra_content')}
         aria-describedby="conteúdoExtrahint"
         placeholder='Digite aqui sobre a conteúdo extra do território quilombola'/>
 
@@ -349,7 +360,7 @@ function Form({ territoryData, territoryId, onFormSubmit }) {
           theme='snow'
           aria-required="true"
           value={formData.reference}
-          onChange={(value) => setFormData({ ...formData, reference: value })}
+          onChange={updateRichText('reference')}
           aria-describedby="referenciaHint"
           placeholder='Insira aqui as referencias'/>    
 

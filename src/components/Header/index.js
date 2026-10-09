@@ -1,13 +1,8 @@
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './style.css';
 import { auth } from '../../firebaseConfig';
 import useAuth from '../../useAuth';
-import homeIcon from './images/homeIcon.png';
-import loginIcon from './images/loginIcon.png';
-import contactIcon from './images/contactIcon.png';
-import aboutIcon from './images/aboutIcon.png';
-
-
+import brandIcon from './images/homeIcon.png';
 
 function Header() {
   const { user } = useAuth();
@@ -22,42 +17,31 @@ function Header() {
   };
 
   return (
-    <header>
-      <div className="menu">
-      <img src={homeIcon} alt="icone do menu home" width="50" height="50" className='headerIcon'/>
-      <Link to="/" tabIndex="1">Início </Link>
-        {user && (
-          <>
-          <img src={aboutIcon} alt="icone do menu sobre" width="50" height="50" className='headerIcon'/>
-          <Link to="/GestaoConteudo" tabIndex="2">Gestão de Conteúdo </Link>
-          </>
-        )}
-        {!user && (
-          <>
-            <img src={aboutIcon} alt="icone do menu sobre" width="50" height="50" className='headerIcon'/>
-            <Link to="/sobre" tabIndex="2">Sobre</Link>
-
-            <img src={contactIcon} alt="icone do menu contato" width="50" height="50" className='headerIcon'/>
-            <Link to="/contato" tabIndex="3">Contato </Link>
-          </>
-        )}
-        {user && (
-           <>
-          <img src={contactIcon} alt="icone do menu sobre" width="50" height="50" className='headerIcon'/>
-          <Link to="/signup" tabIndex="3">Cadastrar usuário </Link>
-          </>
-        )}
-        {user ? (
-          <>
-            <img src={loginIcon} alt="icone do menu sair" width="50" height="50" className='headerIcon'/>
-            <a href="/" onClick={handleLogout} tabIndex="4">Sair </a> 
-          </>
-        ) : (
-          <>
-            <img src={loginIcon} alt="icone do menu sair" width="50" height="50" className='headerIcon'/>
-            <Link to="/login" tabIndex="4">Login </Link>
-          </>
-        )}
+    <header className="site-header">
+      <div className="site-header-inner">
+        <Link to="/" className="brand">
+          <img src={brandIcon} alt="" width="36" height="36" />
+          <span>
+            <strong>Mapeando Quilombos</strong>
+            <small>Porto Alegre</small>
+          </span>
+        </Link>
+        <nav className="site-nav" aria-label="Principal">
+          <NavLink to="/" end>Início</NavLink>
+          {user ? (
+            <>
+              <NavLink to="/GestaoConteudo">Gestão de Conteúdo</NavLink>
+              <NavLink to="/signup">Cadastrar usuário</NavLink>
+              <a href="/" onClick={handleLogout}>Sair</a>
+            </>
+          ) : (
+            <>
+              <NavLink to="/sobre">Sobre</NavLink>
+              <NavLink to="/contato">Contato</NavLink>
+              <NavLink to="/login">Login</NavLink>
+            </>
+          )}
+        </nav>
       </div>
     </header>
   );

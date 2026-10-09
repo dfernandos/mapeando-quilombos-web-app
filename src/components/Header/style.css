@@ -1,42 +1,89 @@
-header {
-    display: flex;
-    margin-top: 10px;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    height: 60px;
-    width: 100%;
-    /* background-color: #BC8F8F; */
-    color: #fff;
-    font-family: 'Arial', sans-serif; /* Escolha uma fonte agradável e legível */
-    padding: 0 20px; /* Adicione espaçamento interno ao header */
+.site-header {
+  background: var(--header, #231910);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 3px solid var(--gold, #b0893f);
+}
+
+.site-header-inner {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.brand img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  flex: none;
+}
+
+.brand span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand strong {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.brand small {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.site-nav a {
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .site-header-inner {
+    width: min(1120px, calc(100% - 28px));
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 0;
+    gap: 10px;
   }
-  
-  header a {
-    color: #fff;
-    font-size: 30px;
-    text-decoration: none; /* Remova a decoração de texto do link */
-    margin-right: 15px;
+
+  .site-nav {
+    justify-content: flex-start;
   }
-  
-  header a + a {
-    margin-left: 20px; /* Aumente o espaçamento entre os links */
-  }
-  
-  /* Estilos responsivos */
-  @media (max-width: 768px) {
-    header {
-      height: 80px;
-      font-size: 16px;
-      padding: 0 10px;
-    }
-  
-    header a {
-      font-size: 14px;
-    }
-  
-    header a + a {
-      margin-left: 10px;
-    }
-  }
-  
+}

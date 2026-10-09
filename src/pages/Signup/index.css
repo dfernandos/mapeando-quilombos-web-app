@@ -51,8 +51,7 @@
     margin-bottom: 10px; /* Adicione espaçamento abaixo da mensagem de erro */
   }
 
-  .signup-title{
-    margin-bottom: 10px;
-    color: white;
-    font-style: bold;
+  .signup-title {
+    margin-bottom: 16px;
+    color: var(--ink, #1c1612);
   }

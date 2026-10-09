@@ -47,8 +47,7 @@
     margin-bottom: 10px; /* Adicione espaçamento abaixo da mensagem de erro */
   }
 
-  .login-title{
-    margin-bottom: 10px;
-    color: white;
-    font-style: bold;
+  .login-title {
+    margin-bottom: 16px;
+    color: var(--ink, #1c1612);
   }

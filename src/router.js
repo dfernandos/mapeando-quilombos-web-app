@@ -20,6 +20,7 @@ function RoutesApp() {
     <BrowserRouter>
       <div className="app-container">
         <Header />
+        <main className="page">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sobre" element={<Sobre />} />
@@ -33,6 +34,7 @@ function RoutesApp() {
           <Route path="/signup" element={<PrivateRoute><Signup /></PrivateRoute>} />
 
         </Routes>
+        </main>
       </div>
       <Footer />
     </BrowserRouter>
