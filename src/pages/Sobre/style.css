@@ -31,9 +31,9 @@ body {
   }
   
   .sobre-header {
-    text-align: center;
-    margin-bottom: 35px;
-    color: white;
+    text-align: left;
+    margin-bottom: 20px;
+    color: var(--ink, #1c1612);
   }
 
   
@@ -44,16 +44,15 @@ body {
     font-size: 25;
   }
 
-  p{
-    margin-top: 10px;
-    text-align: justify;
-    color: white;
-    font-size: 25;
+  .sobre-info p {
+    margin-top: 12px;
+    text-align: left;
+    color: var(--ink-soft, #4e453c);
+    font-size: 1.05rem;
   }
-  
-  .role{
-    font-weight: bold;
-    margin-left: 5px;
-    color: white;
 
+  .role {
+    font-weight: 700;
+    margin-right: 6px;
+    color: var(--ink, #1c1612);
   }

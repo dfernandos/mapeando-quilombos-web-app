@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/analytics';
+import localAuth from './localAuth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,8 +13,12 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
-firebase.initializeApp(firebaseConfig);
+const isFirebaseConfigured = Boolean(firebaseConfig.apiKey);
 
-export const auth = firebase.auth();
+if (isFirebaseConfigured) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+export const auth = isFirebaseConfigured ? firebase.auth() : localAuth;
 
 export default firebase;

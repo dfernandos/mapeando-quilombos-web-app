@@ -1,9 +1,10 @@
 
 .container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
     gap: 20px;
+    width: 100%;
   }
 
   .header {
@@ -25,12 +26,10 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    max-width: 600px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-    margin: 8px;
-    padding: 20px;
-    /* background: #f7eaea; */
+    max-width: none;
+    margin: 0;
+    padding: 24px;
+    gap: 12px;
   }
   
   .headerItem {
@@ -40,10 +39,11 @@
   }
   
   .nome {
-    font-size: 25px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: #fff;
+    font-family: var(--serif, Georgia, serif);
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin: 0;
+    color: var(--ink, #1c1612);
   }
   
   .button-container {
@@ -100,9 +100,10 @@
   }
   
   .capa {
-    margin-bottom: 10px;
-    max-width: 100%;
-    max-height: 150px;
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
   }
 
   

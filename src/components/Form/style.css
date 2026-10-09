@@ -95,7 +95,12 @@
   margin-bottom: 15px; /* Adicione espaçamento abaixo dos editores */
 }
 .form-container .react-quill {
-  margin-bottom: 80px;
+  margin-bottom: 56px;
+}
+
+.form-container label,
+.form-container .error {
+  align-self: flex-start;
 }
 .label-container {
   display: flex;

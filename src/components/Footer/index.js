@@ -1,22 +1,20 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
-import useAuth from '../../useAuth'; // Import the useAuth hook
+import useAuth from '../../useAuth';
 
 function Footer() {
-  const { user } = useAuth(); // Use the useAuth hook to get the user
+  const { user } = useAuth();
 
   return (
     <footer>
       <div className="footer-content">
         <div className="footer-links">
-          <a href="/">Início</a>
-          {user && (
-            <a href="/GestaoConteudo">Gestão de Conteúdo</a>
-          )}
-          <a href="/sobre">Sobre</a>
-          <a href="/contato">Contato</a>
+          <Link to="/">Início</Link>
+          {user && <Link to="/GestaoConteudo">Gestão de Conteúdo</Link>}
+          <Link to="/sobre">Sobre</Link>
+          <Link to="/contato">Contato</Link>
         </div>
-        <p>Todos os direitos reservados &copy; {new Date().getFullYear()}</p>
+        <p>Mapeando Quilombos · Porto Alegre · {new Date().getFullYear()}</p>
       </div>
     </footer>
   );

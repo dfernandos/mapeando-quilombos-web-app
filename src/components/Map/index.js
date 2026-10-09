@@ -131,14 +131,14 @@ function Map() {
   
 
   return (
-    <div className='mapa'>
+    <div className='map-frame'>
 
   {/* <span className="message" tabIndex="0">Existem {territoryQuantity} quilombos em Porto Alegre</span> */}
 
     <MapContainer
       center={center}
       zoom={13}
-      style={{ width: '50vw', height: '60vh' }}
+      style={{ width: '100%', height: '100%' }}
       aria-label="Mapa com os territórios"
       className='mapa'
     >     
@@ -193,7 +193,9 @@ function Map() {
         })
       }
 
-      { territoriesCoordinates.map((marker) => (
+      { territoriesCoordinates.filter((marker) =>
+          Number.isFinite(Number(marker.latitude)) && Number.isFinite(Number(marker.longitude))
+        ).map((marker) => (
         <Marker
           key={marker.name}
           position={[marker.latitude, marker.longitude]}

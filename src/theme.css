@@ -1,0 +1,151 @@
+:root {
+  --ink: #1c1612;
+  --ink-soft: #4e453c;
+  --paper: #fffdf9;
+  --cream: #f3eee6;
+  --line: #e3d8c6;
+  --forest: #1b4f48;
+  --clay: #8d3b32;
+  --clay-deep: #6e2d26;
+  --gold: #b0893f;
+  --header: #231910;
+  --shadow: 0 16px 40px rgba(35, 25, 16, 0.08);
+  --radius: 16px;
+  --serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --content: min(1120px, calc(100% - 48px));
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  background-image: none;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.page {
+  width: var(--content);
+  margin: 36px auto 56px;
+  flex: 1;
+}
+
+h1, h2, .login-title, .signup-title, .forgotPassword-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin: 0 0 8px;
+}
+
+p, .territorio-text, .territorio-text p, .territorio-text h3, .nome, .role, .sobre-header {
+  color: var(--ink-soft);
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--forest);
+}
+
+.page .container,
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 20px;
+  padding: 0;
+}
+
+.login-card,
+.signup-card,
+.form-container,
+.territorio-info,
+.sobre-info,
+.content,
+.custom-alert {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.botao,
+.button,
+.login-button,
+.signup-button,
+.forgot-button,
+.form-container button,
+.button-container button,
+.alert-buttons button {
+  background: var(--clay);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.botao:hover,
+.button:hover,
+.login-button:hover,
+.signup-button:hover,
+.form-container button:hover,
+.button-container button:hover,
+.alert-buttons button:hover {
+  background: var(--clay-deep);
+}
+
+.ql-toolbar,
+.ql-container,
+.ql-editor,
+.ql-editor p {
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+.breadcrumb a {
+  color: var(--forest);
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --content: min(1120px, calc(100% - 28px));
+  }
+
+  .page {
+    margin-top: 24px;
+  }
+}

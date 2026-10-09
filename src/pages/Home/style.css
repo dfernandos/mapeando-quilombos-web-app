@@ -1,43 +1,18 @@
-/* Reset de margens e preenchimentos padrão */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+.home-intro {
+  max-width: 720px;
+}
 
-  @font-face {
-    font-family: 'african-font';
-    src: url('../../fonts/african-font.ttf') format('truetype');
-  }
-  
-  /* Estilo do corpo da página */
-  body {
-    background-color: #f5f5f5;
-  }
-  
-  /* Estilo do container principal */
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    text-align: center;
-    font-family: 'african-font', Arial, sans-serif;
-    color: #2b9781;
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--clay, #8d3b32);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
-  }
-  
-  .Map {
-    width: 100%;
-    max-width: 800px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-    
+.lede {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--ink-soft, #4e453c);
+}
